@@ -1,0 +1,16 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"app_title": "Bayader Aljazirah",
+	"about": "Rólunk",
+	"btnDetails": "Tovább...",
+	"btnBack": "Vissza",
+	"helloBello": "Hello bello",
+	"valami": "Lorem ipsum dolor",
+	"error": "Hiba",
+	"status": "Státusz",
+	"log": "Hiba napló",
+	"login": "Login",
+	"register": "بيس",
+	"home": "Home",
+	"bayader_aljazirah": "Bayader Aljazirah"
+}

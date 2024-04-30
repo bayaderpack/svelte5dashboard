@@ -1,0 +1,16 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"app_title": "Bayader Aljazirah",
+	"about": "About",
+	"btnDetails": "Details",
+	"btnBack": "Back",
+	"helloBello": "Ingyom binygom",
+	"valami": "Something",
+	"error": "Error",
+	"status": "Status",
+	"log": "Error logs",
+	"login": "Login",
+	"home": "Home",
+	"bayader_aljazirah": "Bayader Aljazirah",
+	"register": "Register"
+}
