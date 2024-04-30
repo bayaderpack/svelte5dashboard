@@ -98,7 +98,7 @@
             <ul >
                 <li><a href="/settings/general" class="rounded-none px-8 py-4 font-semibold">General</a></li>
                 <li><a href="/settings/shipping" class="rounded-none px-8 py-4 font-semibold">Shiping</a></li>
-                <li><a href="/settings/peyment-method" class="rounded-none px-8 py-4 font-semibold">Peyment Method</a></li>
+                <li><a href="/settings/payment-method" class="rounded-none px-8 py-4 font-semibold">Peyment Method</a></li>
                 <li><a href="/settings/tax" class="rounded-none px-8 py-4 font-semibold">Tax</a></li>
                 <li><a href="/settings/units" class="rounded-none px-8 py-4 font-semibold">Units</a></li>
                 <li><a href="/settings/languages" class="rounded-none px-8 py-4 font-semibold">Languages</a></li>

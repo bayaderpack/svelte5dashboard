@@ -21,7 +21,7 @@ interface IDataTableFuntions {
 
 interface IDataTable extends IDataTableDatas, IDataTableFuntions {}
 
-export default {
+export {
 	Root,
 	Filter,
 	Pager,
@@ -29,7 +29,7 @@ export default {
 	RowsPerPageSwitcher,
 	Data,
 	Footer,
-	// type IDataTableDatas,
-	// type IDataTableFuntions,
-	// type IDataTable,
+	type IDataTableDatas,
+	type IDataTableFuntions,
+	type IDataTable,
 }
