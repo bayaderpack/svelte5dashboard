@@ -1,43 +1,3 @@
-<!-- <script lang="ts">
-	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
-	import * as m from '$m'
-	import { languageTag, sourceLanguageTag } from '$paraglide/runtime'
-	import { i18n } from '$lib/i18n'
-	import { page } from '$app/stores'
-	import Icon from '@iconify/svelte'
-</script>
-
-<header class="navbar sticky top-0 z-10 bg-base-200">
-	<div class="flex-1 ps-3">
-		<a class="flex items-center gap-1 text-xl" href="/">
-			<img src="/images/logo.svg" alt="logo" width="55px" />
-			{m.app_title()}</a
-		>
-	</div>
-	<nav class="flex-none">
-		<ul class="menu menu-horizontal items-center px-1">
-			<li>
-				<a
-					class="btn btn-ghost flex"
-					href={i18n.route($page.url.pathname)}
-					hreflang={languageTag() == 'ar' ? 'en' : 'ar'}
-					aria-current={'page'}
-					data-sveltekit-noscroll
-				>
-					<Icon icon={languageTag() !== 'ar' ? 'cif:sa' : 'cif:us'} class="me-3" />
-					{languageTag() !== 'ar' ? 'العربية' : 'English'}
-				</a>
-			</li>
-			<li><a class="btn btn-ghost" href="/about">{m.about()}</a></li>
-			<li><a class="btn btn-ghost" href="/logs">{m.log()}</a></li>
-			<li><a class="btn btn-ghost" href="/dashboard">Dashboard</a></li>
-			<li>
-				<button onclick={window.toggleTheme}><ThemeToggleIcon class="w-4" /></button>
-			</li>
-		</ul>
-	</nav>
-</header> -->
-
 <script>
 	import Dropdown from './Dropdown.svelte'
 	import Icon from '@iconify/svelte'
@@ -46,9 +6,11 @@
 	import { page } from '$app/stores'
 	import * as m from '$paraglide/messages'
 	import { cn } from "$lib/utils"
+	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
 
 	let { logo=false } = $props()
 
+	
 	/**
 	 * @param {string} token
 	 */
@@ -274,39 +236,14 @@ class={cn(
 			</ul>
 		</div>
 		<div class="navbar-end">
+			<button onclick={window.toggleTheme}><ThemeToggleIcon class="w-4" /></button>
 			<button class="btn btn-circle btn-ghost hidden lg:flex" aria-label="Search">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-5 w-5"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-					/>
-				</svg>
+				<Icon icon="bi:search" class="text-2xl font-semibold"></Icon>
 			</button>
 			<div class="dropdown dropdown-end mr-3 hidden lg:flex">
 				<button class="btn btn-circle btn-ghost" onclick={() => (show = !show)}>
 					<div class="indicator">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-							/>
-						</svg>
+						<Icon icon="bi:cart" class="text-2xl font-semibold"></Icon>
 						<span class="badge indicator-item badge-sm"
 							>{new Intl.NumberFormat(languageTag() == 'ar' ? 'ar-SA' : 'en-US').format(8)}</span
 						>

@@ -8,40 +8,39 @@
 
 	interface MyProps {
 		headers: Array<string>
+		data: Array<any>
+		link: string
 	}
-	const { headers }: MyProps = $props()
-
-	let dropdownOpen = $state(false)
-
-	let data = $state([
-		{
-			Name: 'Bajro',
-			Email: 'bajro0@gmail.com',
-			Sex: 'Male',
-		},
-		{
-			Name: 'Bajro',
-			Email: 'bajro2@gmail.com',
-			Sex: 'Male',
-		},
-		{
-			Name: 'Bajro',
-			Email: 'bajro3@gmail.com',
-			Sex: 'Male',
-		},
-		{
-			Name: 'Bajro',
-			Email: 'bajro4@gmail.com',
-			Sex: 'Female',
-		},
-	])
-
-	let totalData = $derived(data.length)
-	const pageCount = $derived(Math.ceil(totalData / rowsPerPage))
+	const { headers, data, link }: MyProps = $props()
+	let search = $state('')
 	const startIndex = $derived((activePage - 1) * rowsPerPage)
 	const endIndex = $derived(startIndex + rowsPerPage)
+	let dropdownOpen = $state(false)
+	let updateDataAndPagination = $derived.by(() => {
+		if (search == '') {
+			return data.slice(startIndex, endIndex)
+		} else {
+			let newData = data.filter((item) => {
+				// Check if any field (Name, Email, Sex) contains the search term
+				return Object.values(item).some((value) =>
+					String(value).toLowerCase().includes(search.toLowerCase()),
+				)
+			})
+			return newData.slice(startIndex, endIndex)
+		}
+	})
+	
+	let totalData = $derived.by(() => {
+		if(search == '') {
+			return data.length
+		} else {
+			return updateDataAndPagination.length
+		}
+	})
+	const pageCount = $derived(Math.ceil(totalData / rowsPerPage))
 
-	let updateDataAndPagination = $derived(data.slice(startIndex, endIndex))
+	
+
 
 	const deleteRecord = (index: any) => {
 		Swal.fire({
@@ -63,19 +62,69 @@
 			}
 		})
 	}
+
+	let isAscending = $state(false)
+
+	//Pass field to function and compare values and sort based on the values
+	const sortFields = (field: string) => {
+		isAscending = !isAscending
+		data.sort(function (a, b) {
+			if (a[field] < b[field]) {
+				return isAscending ? -1 : 1
+			}
+			if (a[field] > b[field]) {
+				return isAscending ? 1 : -1
+			}
+			return 0
+		})
+	}
+
+	// function searchAllFields() {
+	// 	console.log(search)
+	// 	return data.filter((item) => {
+	// 		// Check if any field (Name, Email, Sex) contains the search term
+	// 		return Object.values(item).some((value) =>
+	// 			String(value).toLowerCase().includes(search.toLowerCase()),
+	// 		)
+	// 	})
+	// }
+
+	
 </script>
 
 <div class="flex flex-col">
 	<div class="container">
-		<button class="btn btn-success float-right">Add new</button>
-		<table class=" my-5 flex w-full flex-row overflow-hidden rounded-lg sm:bg-base-100 sm:shadow-lg">
+		<label class="input input-bordered flex items-center gap-2">
+			<input
+				type="text"
+				class="grow"
+				placeholder="Search"
+				bind:value={search}
+				
+			/>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 16"
+				fill="currentColor"
+				class="h-4 w-4 opacity-70"
+				><path
+					fill-rule="evenodd"
+					d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+					clip-rule="evenodd"
+				/></svg
+			>
+		</label>
+		<a href={link} class="btn btn-success float-right">Add new</a>
+		<table
+			class=" my-5 flex w-full flex-row overflow-hidden rounded-lg sm:bg-base-100 sm:shadow-lg"
+		>
 			<thead class="text-base-content">
 				{#each updateDataAndPagination as rows}
 					<tr
 						class="flex-no wrap mb-2 flex flex-col rounded-l-lg bg-base-200 sm:mb-0 sm:table-row sm:rounded-none"
 					>
 						{#each headers as header}
-							<th class="p-3 text-left">{header}</th>
+							<th class="p-3 text-left" onclick={() => sortFields(header)}>{header}</th>
 						{/each}
 						<th class="w-[100px] p-6 text-left md:p-3">Actions</th>
 					</tr>
@@ -85,9 +134,11 @@
 				{#each updateDataAndPagination as dat, ind}
 					<tr class="flex-no wrap mb-2 flex flex-col sm:mb-0 sm:table-row">
 						{#each headers as head}
-							<td class="border-grey-light truncate border p-3 hover:bg-gray-100">{dat[head as keyof typeof dat]}</td>
+							<td class="truncate border border-base-100 p-3 hover:bg-base-300"
+								>{dat[head as keyof typeof dat]}</td
+							>
 						{/each}
-						<td class="border-grey-light flex cursor-pointer space-x-3 border p-3">
+						<td class="flex cursor-pointer space-x-3 border border-base-100 p-3">
 							<button class="btn btn-warning p-3 text-white">
 								<Icon icon="bi:pen"></Icon>
 							</button>
@@ -105,14 +156,14 @@
 	<div class="relative w-56">
 		<button
 			onclick={() => (dropdownOpen = !dropdownOpen)}
-			class="inline-flex h-10 items-center justify-center rounded-md border bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"
+			class="inline-flex h-10 items-center justify-center rounded-md border bg-base-100 px-4 py-2 text-sm font-medium transition-colors hover:bg-base-200 focus:bg-base-300 focus:outline-none focus:ring-2 focus:ring-base-200 focus:ring-offset-2 active:bg-base-300 disabled:pointer-events-none disabled:opacity-50"
 			>{rowsPerPage} per page</button
 		>
 
 		{#if dropdownOpen}
 			<div class="absolute left-1/2 top-0 z-50 mt-12 w-56 -translate-x-1/2">
 				<div
-					class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md"
+					class="mt-1 rounded-md border border-base-200 bg-base-200 p-1 text-sm text-base-content shadow-md"
 				>
 					<button
 						onclick={() => {
@@ -141,7 +192,7 @@
 			onclick={() => {
 				activePage > 1 ? (activePage -= 1) : (activePage = pageCount)
 			}}
-			class="btn card  grid h-12 w-12 place-content-center p-3"
+			class="btn card grid h-12 w-12 place-content-center p-3"
 		>
 			<Icon icon="bi:caret-left"></Icon>
 		</button>
@@ -157,7 +208,7 @@
 			onclick={() => {
 				activePage < pageCount ? (activePage += 1) : (activePage = 1)
 			}}
-			class="btn card  grid h-12 w-12 place-content-center p-3"
+			class="btn card grid h-12 w-12 place-content-center p-3"
 		>
 			<Icon icon="bi:caret-right"></Icon>
 		</button>

@@ -52,7 +52,7 @@
 <div class="grid grid-cols-3 gap-16">
 {#each baskets as basket, basketIndex (basket)}
   <div animate:flip >
-    <h3 class="font-black py-4 px-12 bg-primary rounded-t-xl" contenteditable>{basket.name}</h3>
+    <h3 class="font-black py-4 px-12 bg-primary rounded-t-xl text-primary-content" contenteditable>{basket.name}</h3>
     <ul
 	class="border border-slate-700 min-h-36"
 	  	class:border={hoveringOverBasket === basket.name}
