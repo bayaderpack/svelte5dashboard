@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// Inspired by https://svelte.dev/repl/810b0f1e16ac4bbd8af8ba25d5e0deff?version=3.4.2.
 	import {flip} from 'svelte/animate';
 	
@@ -19,21 +19,21 @@
 	
 	let hoveringOverBasket = $state();
 	
-	function dragStart(event, basketIndex, itemIndex) {
+	function dragStart(event: DragEvent, basketIndex:number, itemIndex:number) {
 		
 		// The data we want to make available when the element is dropped
     // is the index of the item being dragged and
     // the index of the basket from which it is leaving.
 		const data = {basketIndex, itemIndex};
 		// console.log(data)
-   	event.dataTransfer.setData('text/plain', JSON.stringify(data));
+   	event.dataTransfer?.setData('text/plain', JSON.stringify(data));
 	}
 	
-	function drop(event, basketIndex) {
+	function drop(event: DragEvent, basketIndex:number) {
 		event.preventDefault();
 
-    const json = event.dataTransfer.getData("text/plain");
-		const data = JSON.parse(json);
+    const json = event.dataTransfer?.getData("text/plain");
+		const data = JSON.parse(json!);
 		
 		// Remove the item from one basket.
 		// Splice returns an array of the deleted elements, just one in this case.

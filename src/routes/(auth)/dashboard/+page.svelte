@@ -1,7 +1,7 @@
 <script>
 	import { browser } from '$app/environment'
 	import Chart from '$lib/components/Chart.svelte'
-	import { onMount, onDestroy } from 'svelte'
+	import TestTable from '$lib/components/TestTable.svelte'
     let chart = $state()
     const [, ...result] = Array(31).keys();
 
@@ -132,13 +132,7 @@ function generateRandomNumbers2() {
 
 function updateRandomNumbers() {
   const result = generateRandomNumbers();
-  // options.series.data = result
   options.series[0].data = result
-  // Chart.updateChartSeries([{
-  //   name: 'Users',
-  //   data: result
-  // }])
-  // console.log(result); // Example output: [3.2, 7.8, 4.5, 9.1, 2.6, 6.4, 1.9, 5.7, 8.3, 3.8, 7.2, 4.1]
 }
 
 // Initial call to generate and log random numbers
@@ -147,9 +141,6 @@ updateRandomNumbers();
 
 // Schedule updates every 5 seconds
 setInterval(updateRandomNumbers, 5000);
-
-
-
 
 </script>
 <svelte:head>
@@ -207,5 +198,6 @@ setInterval(updateRandomNumbers, 5000);
 		</div>
 	</div>
 </div>
+<TestTable></TestTable>
 
 

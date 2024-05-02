@@ -39,7 +39,7 @@ const config: Config = {
 		logs: false,
 		themes: [
 			{ light: { ...themes.emerald, ...themeOverrides } },
-			{ dark: { ...themes.night, ...themeOverrides } },
+			{ dark: { ...themes.dark, ...themeOverrides } },
 		],
 	},
 	plugins: [daisyui],
