@@ -14,12 +14,12 @@
 			Sex: 'Male',
 		},
 		{
-			Name: 'Jro',
+			Name: 'Za',
 			Email: 'bajro3@gmail.com',
 			Sex: 'Male',
 		},
 		{
-			Name: 'Ro',
+			Name: 'za',
 			Email: 'bajro4@gmail.com',
 			Sex: 'Female',
 		},

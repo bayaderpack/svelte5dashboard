@@ -29,18 +29,15 @@
 			return newData.slice(startIndex, endIndex)
 		}
 	})
-	
+
 	let totalData = $derived.by(() => {
-		if(search == '') {
+		if (search == '') {
 			return data.length
 		} else {
 			return updateDataAndPagination.length
 		}
 	})
 	const pageCount = $derived(Math.ceil(totalData / rowsPerPage))
-
-	
-
 
 	const deleteRecord = (index: any) => {
 		Swal.fire({
@@ -65,7 +62,6 @@
 
 	let isAscending = $state(false)
 
-	//Pass field to function and compare values and sort based on the values
 	const sortFields = (field: string) => {
 		isAscending = !isAscending
 		data.sort(function (a, b) {
@@ -78,41 +74,13 @@
 			return 0
 		})
 	}
-
-	// function searchAllFields() {
-	// 	console.log(search)
-	// 	return data.filter((item) => {
-	// 		// Check if any field (Name, Email, Sex) contains the search term
-	// 		return Object.values(item).some((value) =>
-	// 			String(value).toLowerCase().includes(search.toLowerCase()),
-	// 		)
-	// 	})
-	// }
-
-	
 </script>
 
 <div class="flex flex-col">
 	<div class="container">
-		<label class="input input-bordered flex items-center gap-2">
-			<input
-				type="text"
-				class="grow"
-				placeholder="Search"
-				bind:value={search}
-				
-			/>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 16 16"
-				fill="currentColor"
-				class="h-4 w-4 opacity-70"
-				><path
-					fill-rule="evenodd"
-					d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-					clip-rule="evenodd"
-				/></svg
-			>
+		<label class="input input-bordered flex max-w-56 items-center gap-2">
+			<input type="text" class="grow" placeholder="Search" bind:value={search} />
+			<Icon icon="bi:search"></Icon>
 		</label>
 		<a href={link} class="btn btn-success float-right">Add new</a>
 		<table
@@ -124,7 +92,9 @@
 						class="flex-no wrap mb-2 flex flex-col rounded-l-lg bg-base-200 sm:mb-0 sm:table-row sm:rounded-none"
 					>
 						{#each headers as header}
-							<th class="p-3 text-left" onclick={() => sortFields(header)}>{header}</th>
+							<th class="border-r border-base-300 p-3 text-left" onclick={() => sortFields(header)}
+								>{header}</th
+							>
 						{/each}
 						<th class="w-[100px] p-6 text-left md:p-3">Actions</th>
 					</tr>
@@ -134,7 +104,7 @@
 				{#each updateDataAndPagination as dat, ind}
 					<tr class="flex-no wrap mb-2 flex flex-col sm:mb-0 sm:table-row">
 						{#each headers as head}
-							<td class="truncate border border-base-100 p-3 hover:bg-base-300"
+							<td class="truncate border border-base-300 p-3 hover:bg-base-300"
 								>{dat[head as keyof typeof dat]}</td
 							>
 						{/each}

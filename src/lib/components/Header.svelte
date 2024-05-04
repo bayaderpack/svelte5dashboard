@@ -5,12 +5,11 @@
 	import { i18n } from '$lib/i18n'
 	import { page } from '$app/stores'
 	import * as m from '$paraglide/messages'
-	import { cn } from "$lib/utils"
+	import { cn } from '$lib/utils'
 	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
 
-	let { logo=false } = $props()
+	let { logo = false } = $props()
 
-	
 	/**
 	 * @param {string} token
 	 */
@@ -38,7 +37,6 @@
 		return payload
 	}
 
-
 	let email =
 		$page.data?.accessJWT != '' &&
 		$page.data?.accessJWT != undefined &&
@@ -50,19 +48,18 @@
 </script>
 
 <header
-class={cn(
-	logo && 'shadow-lg',
-	!logo && 'shadow-sm',
-	'easy-in-out relative z-[99] w-full rounded-lg  transition-all duration-300',
-)}
+	class={cn(
+		logo && 'shadow-lg',
+		!logo && 'shadow-sm',
+		'easy-in-out relative z-[99] w-full rounded-lg  transition-all duration-300',
+	)}
 >
 	<nav
-	class={cn(
-		logo && 'bg-base-100 rounded-lg  shadow-sm',
-		!logo && 'bg-base-100 rounded-none  shadow-sm',
-		'easy-in-out navbar  transition-all duration-300 xl:px-24',
-	)}
-	
+		class={cn(
+			logo && 'rounded-lg bg-base-100  shadow-sm',
+			!logo && 'rounded-none bg-base-100  shadow-sm',
+			'easy-in-out navbar  transition-all duration-300 xl:px-24',
+		)}
 	>
 		<div class="navbar-start">
 			<div class="dropdown">
@@ -257,7 +254,7 @@ class={cn(
 				aria-current={'page'}
 				data-sveltekit-noscroll
 			>
-				<Icon icon={languageTag() !== 'ar' ? 'cif:sa' : 'cif:us'} class="me-3" ></Icon>
+				<Icon icon={languageTag() !== 'ar' ? 'cif:sa' : 'cif:us'} class="me-3"></Icon>
 				{languageTag() !== 'ar' ? 'العربية' : 'English'}
 			</a>
 			{#if email == null || email == 'null' || email == undefined || email == 'undefined'}
@@ -268,11 +265,11 @@ class={cn(
 					{m.login()}
 				</a>
 				<a
-				href="/register"
-				class="btn btn-secondary text-black flex items-center gap-2 rounded-full  px-6 transition-all duration-500 "
-			>
-				{m.register()}
-			</a>
+					href="/register"
+					class="btn btn-secondary flex items-center gap-2 rounded-full px-6 text-black transition-all duration-500"
+				>
+					{m.register()}
+				</a>
 			{:else}
 				<div class="avatar placeholder online">
 					<div class="w-16 rounded-full bg-neutral text-neutral-content">

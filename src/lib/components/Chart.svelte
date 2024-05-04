@@ -1,15 +1,11 @@
-<script >
+<script>
+	let { options, myChart = $bindable() } = $props()
 
-	let {options , myChart = $bindable()} = $props();
-
-	let ApexCharts = $state();
-	let loaded = $state(false);
-
+	let ApexCharts = $state()
+	let loaded = $state(false)
 
 	const chart = (/** @type {HTMLDivElement} */ node, /** @type {unknown} */ options) => {
-
-		if (!loaded)
-			return
+		if (!loaded) return
 
 		myChart = new ApexCharts(node, options)
 		// @ts-ignore
@@ -26,24 +22,26 @@
 			destroy() {
 				// @ts-ignore
 				myChart.destroy()
-			}
+			},
 		}
 	}
 
 	const getApexCharts = async () => {
-		ApexCharts = (await import('apexcharts')).default;
-
+		ApexCharts = (await import('apexcharts')).default
 
 		loaded = true
 	}
 	$effect(() => {
-
 		getApexCharts()
 	})
-
-
-</script> 
+</script>
 
 {#if loaded}
-<div use:chart={options}></div>
+	<div use:chart={options}></div>
 {/if}
+
+<style lang="postcss">
+	:global(html[data-theme='dark'] .apexcharts-canvas text) {
+		fill: white;
+	}
+</style>

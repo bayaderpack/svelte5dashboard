@@ -1,16 +1,17 @@
 <script lang="ts">
-	import Effect from "./Effect.svelte";
+	import Effect from './Effect.svelte'
 
 	interface MyProps {
-        title: string,
-        children: any
-    }
+		title: string
+		children: any
+	}
 
-    let { title, children }: MyProps = $props()
+	let { title, children }: MyProps = $props()
 </script>
+
 <svelte:head>
-    <title>{title}</title>
-    <meta name="description" content="Product page with filters" />
+	<title>{title}</title>
+	<meta name="description" content="Product page with filters" />
 </svelte:head>
 <div class="container mx-auto mt-24">
 	<article class="prose max-w-full">
@@ -19,7 +20,7 @@
 			<h1 class="z-10 text-6xl uppercase">{title}</h1>
 		</div>
 
-		<div class="bg-base-100 rounded-box p-8 md:p-16">
+		<div class="rounded-box bg-base-100 p-8 md:p-16">
 			{@render children()}
 		</div>
 	</article>

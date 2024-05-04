@@ -81,9 +81,9 @@
 		}
 
 		:global([data-theme='dark']) svg .moon > circle {
+			scale: 1.1;
 			transition-delay: calc(var(--duration) / 2);
 			transition-duration: var(--duration);
-			scale: 1.1;
 		}
 	}
 </style>

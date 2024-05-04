@@ -1,6 +1,7 @@
 <script>
 	import Card from '$lib/components/Card.svelte'
 	import Hero from '$lib/components/Hero.svelte'
+	import Seo from '$lib/components/Seo.svelte';
 	// import { onMount } from 'svelte'
 
 	$effect(() => {
@@ -11,10 +12,12 @@
 	})
 </script>
 
-<svelte:head>
+
+<Seo title="Bayaderpack" description="You think it we print it"></Seo>
+<!-- <svelte:head>
     <title>Bayaderpack</title>
     <meta name="description" content="You think it we print it" />
-</svelte:head>
+</svelte:head> -->
 <div class="flex flex-col items-center justify-center px-16">
 	<Hero />
 	<p>
