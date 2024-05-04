@@ -49,7 +49,7 @@
 
 <header
 	class={cn(
-		logo && 'shadow-lg',
+		logo && 'shadow-sm',
 		!logo && 'shadow-sm',
 		'easy-in-out relative z-[99] w-full rounded-lg  transition-all duration-300',
 	)}

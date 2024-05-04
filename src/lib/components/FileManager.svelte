@@ -1,3 +1,7 @@
+<script>
+  
+</script>
+
 <div class="h-[500px] w-full border-base-300">
 	<div class="grid grid-cols-8">
 		<div class="card">
