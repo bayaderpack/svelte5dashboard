@@ -28,9 +28,8 @@
 
 		<div class="border-t border-base-100 bg-base-100">
 			<ul class="space-y-1 border-base-100 p-4">
-                {@render children()}
+				{@render children()}
 			</ul>
 		</div>
 	</details>
-	
 </div>
