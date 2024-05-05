@@ -233,12 +233,12 @@
 			</ul>
 		</div>
 		<div class="navbar-end">
-			<button onclick={window.toggleTheme}><ThemeToggleIcon class="w-4" /></button>
-			<button class="btn btn-circle btn-ghost hidden lg:flex" aria-label="Search">
+			<button onclick={window.toggleTheme} title="Toggle Theme" aria-label="Toggle theme"><ThemeToggleIcon class="w-4"/></button>
+			<button class="btn btn-circle btn-ghost hidden lg:flex" aria-label="Search" title="Search">
 				<Icon icon="bi:search" class="text-2xl font-semibold"></Icon>
 			</button>
 			<div class="dropdown dropdown-end mr-3 hidden lg:flex">
-				<button class="btn btn-circle btn-ghost" onclick={() => (show = !show)}>
+				<button class="btn btn-circle btn-ghost" onclick={() => (show = !show)} aria-label="Shopping cart" title="Shopping cart">
 					<div class="indicator">
 						<Icon icon="bi:cart" class="text-2xl font-semibold"></Icon>
 						<span class="badge indicator-item badge-sm"

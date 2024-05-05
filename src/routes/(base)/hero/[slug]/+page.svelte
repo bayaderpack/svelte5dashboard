@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { sourceLanguageTag } from '$paraglide/runtime'
 	import * as m from '$m'
+	import Seo from '$lib/components/Seo.svelte'
 
 	let { data } = $props()
 
-	const imgLink = $derived(`/images/${data.slug}.jpg`)
+	const imgLink = $derived(`/images/${data.slug}.avif`)
 	const cardTitle = $derived(data.slug.charAt(0).toUpperCase() + data.slug.slice(1))
 	const navLink = $derived(() => {
 		return data.lang === sourceLanguageTag ? `/` : `/${data.lang}`
@@ -12,6 +13,7 @@
 
 	// let x = y / 0
 </script>
+<Seo title="Hero section" description="Details about heros"></Seo>
 
 <h1 style={`view-transition-name: card-title-${data.slug}`}>{cardTitle}</h1>
 <div class="flex gap-4">

@@ -83,43 +83,48 @@
 			<Icon icon="bi:search"></Icon>
 		</label>
 		<a href={link} class="btn btn-success float-right">Add new</a>
-		<table
-			class=" my-5 flex w-full flex-row overflow-hidden rounded-lg sm:bg-base-100 sm:shadow-lg"
-		>
-			<thead class="text-base-content">
-				{#each updateDataAndPagination as rows}
-					<tr
-						class="flex-no wrap mb-2 flex flex-col rounded-l-lg bg-base-200 sm:mb-0 sm:table-row sm:rounded-none"
-					>
-						{#each headers as header}
-							<th class="border-r border-base-300 p-3 text-left" onclick={() => sortFields(header)}
-								>{header}</th
-							>
-						{/each}
-						<th class="w-[100px] p-6 text-left md:p-3">Actions</th>
-					</tr>
-				{/each}
-			</thead>
-			<tbody class="flex-1 sm:flex-none">
-				{#each updateDataAndPagination as dat, ind}
-					<tr class="flex-no wrap mb-2 flex flex-col sm:mb-0 sm:table-row">
-						{#each headers as head}
-							<td class="truncate border border-base-300 p-3 hover:bg-base-300"
-								>{dat[head as keyof typeof dat]}</td
-							>
-						{/each}
-						<td class="flex cursor-pointer space-x-3 border border-base-100 p-3">
-							<button class="btn btn-warning p-3 text-white">
-								<Icon icon="bi:pen"></Icon>
-							</button>
-							<button class="btn btn-error p-3 text-white" onclick={() => deleteRecord(dat)}>
-								<Icon icon="bi:trash"></Icon>
-							</button>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		{#if updateDataAndPagination.length > 0}
+			<table
+				class=" my-5 flex w-full flex-row overflow-hidden rounded-lg sm:bg-base-100 sm:shadow-md"
+			>
+				<thead class="text-base-content">
+					{#each updateDataAndPagination as rows}
+						<tr
+							class="flex-no wrap mb-2 flex flex-col rounded-l-lg bg-base-200 sm:mb-0 sm:table-row sm:rounded-none"
+						>
+							{#each headers as header}
+								<th
+									class="border-r border-base-300 p-3 text-left"
+									onclick={() => sortFields(header)}>{header}</th
+								>
+							{/each}
+							<th class="w-[100px] p-6 text-left md:p-3">Actions</th>
+						</tr>
+					{/each}
+				</thead>
+				<tbody class="flex-1 sm:flex-none">
+					{#each updateDataAndPagination as dat, ind}
+						<tr class="flex-no wrap mb-2 flex flex-col sm:mb-0 sm:table-row">
+							{#each headers as head}
+								<td class="truncate border border-base-300 p-3 hover:bg-base-300"
+									>{dat[head as keyof typeof dat]}</td
+								>
+							{/each}
+							<td class="flex cursor-pointer space-x-3 border border-base-100 p-3">
+								<button class="btn btn-warning p-3 text-white">
+									<Icon icon="bi:pen"></Icon>
+								</button>
+								<button class="btn btn-error p-3 text-white" onclick={() => deleteRecord(dat)}>
+									<Icon icon="bi:trash"></Icon>
+								</button>
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+			{:else}
+			<h2>There is no data...</h2>
+		{/if}
 	</div>
 </div>
 <div class="flex justify-between px-16">
@@ -162,7 +167,7 @@
 			onclick={() => {
 				activePage > 1 ? (activePage -= 1) : (activePage = pageCount)
 			}}
-			class="btn card grid h-12 w-12 place-content-center p-3"
+			class="btn card btn-primary grid h-12 w-12 place-content-center p-3"
 		>
 			<Icon icon="bi:caret-left"></Icon>
 		</button>
@@ -170,7 +175,7 @@
 			<button
 				class="btn card grid h-12 w-12 place-content-center p-3"
 				class:btn-ghost={index + 1 != activePage}
-				class:btn-primary={index + 1 == activePage}
+				class:btn-secondary={index + 1 == activePage}
 				onclick={() => (activePage = index + 1)}>{index + 1}</button
 			>
 		{/each}
@@ -178,7 +183,7 @@
 			onclick={() => {
 				activePage < pageCount ? (activePage += 1) : (activePage = 1)
 			}}
-			class="btn card grid h-12 w-12 place-content-center p-3"
+			class="btn card btn-primary grid h-12 w-12 place-content-center p-3"
 		>
 			<Icon icon="bi:caret-right"></Icon>
 		</button>

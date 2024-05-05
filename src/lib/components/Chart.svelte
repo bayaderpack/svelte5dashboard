@@ -1,44 +1,32 @@
-<script>
-	let { options, myChart = $bindable() } = $props()
+<script lang="ts">
+	import type ApexCharts from 'apexcharts'
+	import type { Action } from 'svelte/action'
 
-	let ApexCharts = $state()
-	let loaded = $state(false)
+	interface MyProps {
+		options: any
+		myChart: ApexCharts
+	}
+	let { options, myChart = $bindable() }: MyProps = $props()
 
-	const chart = (/** @type {HTMLDivElement} */ node, /** @type {unknown} */ options) => {
-		if (!loaded) return
-
-		myChart = new ApexCharts(node, options)
-		// @ts-ignore
-		myChart.render()
-
+	export const chart: Action<HTMLDivElement, MyProps> = (node, options) => {
+		import('apexcharts')
+			.then((module) => module.default)
+			.then((ApexCharts) => {
+				myChart = new ApexCharts(node, options)
+				myChart.render()
+			})
 		return {
-			/**
-			 * @param {any} options
-			 */
-			update(options) {
-				// @ts-ignore
+			update(options: any) {
 				myChart.updateOptions(options)
 			},
-			destroy() {
-				// @ts-ignore
+			destroy: () => {
 				myChart.destroy()
 			},
 		}
 	}
-
-	const getApexCharts = async () => {
-		ApexCharts = (await import('apexcharts')).default
-
-		loaded = true
-	}
-	$effect(() => {
-		getApexCharts()
-	})
 </script>
 
-{#if loaded}
-	<div use:chart={options}></div>
-{/if}
+<div use:chart={options}></div>
 
 <style lang="postcss">
 	:global(html[data-theme='dark'] .apexcharts-canvas text) {

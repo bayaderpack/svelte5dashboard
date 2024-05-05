@@ -1,7 +1,7 @@
 import { HTMLAttributes } from './../node_modules/preact/src/jsx.d';
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-import type { ApexOptions } from "apexcharts"
+import type { ApexCharts } from "apexcharts"
 declare global {
 
 	// fresh API just dropped, let's extend Document
@@ -18,7 +18,7 @@ declare global {
 
 	interface Window {
 		toggleTheme?(): void,
-		ApexCharts: ApexOptions,
+		ApexCharts: ApexCharts,
 	}
 	namespace App {
 		// interface Error {}

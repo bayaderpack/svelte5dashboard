@@ -149,7 +149,7 @@ setInterval(updateRandomNumbers, 5000);
 </svelte:head>
 <div class="grid grid-cols-4 gap-4">
 	{#if browser}
-		<div class="card rounded-box shadow-lg">
+		<div class="card rounded-box shadow-md">
 			<Chart {options} bind:myChart={chart}/>
 		</div>
 	{/if}
