@@ -178,7 +178,7 @@
 		}
 	}
 	let form = $state<HTMLDivElement>()
-	$inspect(days)
+
 	let clickedItem = $state<ItemProps>()
 	const contextMenu = (e: MouseEvent, item: ItemProps) => {
 		e.preventDefault()
@@ -189,15 +189,12 @@
 		form?.classList.add('flex')
 		div.appendChild(form!)
 
-		div.style.position = 'absolute'
+
 		div.style.top = e.pageY + 'px'
 		div.style.left = e.pageX + 'px'
-		div.style.background = '#fff'
-		div.style.padding = '10px'
-		div.style.border = '1px solid #000'
-		div.style.borderRadius = '5px'
-		div.style.zIndex = '100'
-		div.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)'
+
+
+        div.classList.add('bg-base-200','rounded-box','shadow-md','border','border-base-200','absolute','z-[100]','p-4')
 
 		document.body.appendChild(div)
 		//if click outside of div, remove it
@@ -209,23 +206,22 @@
 	}
 </script>
 
-<div class="hidden flex-col" bind:this={form}>
-	<div class="flex">
-		<button onclick={() => randomTaskClass(clickedItem!)}>Edit</button>
-		<button onclick={() => randomTaskClass(clickedItem!)}>Delete</button>
+<div class="hidden flex-col space-y-6 rounded-box " bind:this={form}>
+	<div class="flex space-x-4">
+		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-warning">Edit</button>
+		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-error">Delete</button>
 	</div>
 
 	{#if clickedItem}
-		<div>
-			<select bind:value={clickedItem.className}>
+		
+            <select class="select select-bordered w-full max-w-xs"  bind:value={clickedItem.className}>
 				<option value="badge-primary">Primary</option>
                 <option value="badge-secondary">Secondary</option>
 				<option value="badge-warning">Warning</option>
 				<option value="badge-error">Danger</option>
 				<option value="badge-info">Info</option>
-			</select>
-		</div>
-		<input type="text" placeholder="Title" bind:value={clickedItem.title} />
+              </select>
+		<input type="text" placeholder="Title" bind:value={clickedItem.title} class="input input-bordered w-full max-w-xs" />
 	{/if}
 </div>
 
@@ -289,14 +285,6 @@
 			{/each}{/if}
 	</div>
 
-	<!-- <Calendar
-          {headers}
-          {days}
-          {items}
-          on:dayClick={(e)=>dayClick(e.detail)}
-          on:itemClick={(e)=>itemClick(e.detail)}
-          on:headerClick={(e)=>headerClick(e.detail)}
-          /> -->
 </div>
 
 <style lang="postcss">
