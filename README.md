@@ -36,7 +36,7 @@ Some of interesting pages that I working right now on is the following:
 
 ![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/calendarDark.JPG "Calendar dark version")
 ![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/CalendarLight.JPG "Calendar light version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/costumersListLight.JPG "Customers list light version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/costumerListDark.JPG "Customers list dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/custumersListLight.JPG "Customers list light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/custumerListDark.JPG "Customers list dark version")
 ![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/dashboardLight.JPG "dashboard light version")
 ![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/DashboardDark.JPG "dashboard dark version")
