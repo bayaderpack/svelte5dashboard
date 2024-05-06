@@ -2,9 +2,6 @@
 	import * as m from '$m'
 	import { page } from '$app/stores'
 
-
-	$inspect($page.url.pathname)
-
 </script>
 
 <ul class="menu min-h-full w-80 bg-base-100 p-0 text-base-content">

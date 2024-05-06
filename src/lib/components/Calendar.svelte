@@ -31,9 +31,6 @@
 	}
 	var days = $state<Array<DaysProps>>()
 
-	function randInt(max: number) {
-		return Math.floor(Math.random() * max) + 1
-	}
 
 	interface ItemProps {
 		title: string
@@ -86,7 +83,6 @@
 			},
 		]
 
-		console.log(items)
 		//This is where you calc the row/col to put each dated item
 		for (let i of items) {
 			let rc = findRowCol(i.date)
@@ -102,8 +98,8 @@
 		}
 	}
 
-    const changeColumnPosition = () => {
-        for (let i of items!) {
+	const changeColumnPosition = () => {
+		for (let i of items!) {
 			let rc = findRowCol(i.date)
 			if (rc == null) {
 				console.log('didn`t find date for ', i)
@@ -115,11 +111,6 @@
 				i.startRow = rc.row
 			}
 		}
-    }
-
-	const randomTaskClass = (item: ItemProps) => {
-		let taskClass = `badge-${['primary', 'error', 'warning', 'info'][Math.floor(Math.random() * 4)]}`
-		item.className = taskClass
 	}
 
 	function initMonth() {
@@ -154,7 +145,6 @@
 	}
 
 	function initContent() {
-		// headers = dayNames
 		initMonth()
 		initMonthItems()
 	}
@@ -194,10 +184,14 @@
 	let form = $state<HTMLDivElement>()
 
 	let clickedItem = $state<ItemProps>()
+	let div = $state<HTMLDivElement>()
+
+	let checkedItemPosition = $state<number>()
 	const contextMenu = (e: MouseEvent, item: ItemProps) => {
 		e.preventDefault()
-		var div = document.createElement('div')
+		div = document.createElement('div')
 		clickedItem = item
+		checkedItemPosition = items?.indexOf(item)
 
 		form?.classList.remove('hidden')
 		form?.classList.add('flex')
@@ -220,21 +214,33 @@
 		document.body.appendChild(div)
 		//if click outside of div, remove it
 		document.addEventListener('click', function (ev) {
-			if (!div.contains(ev.target as Node)) {
-				div.remove()
+			if (!div!.contains(ev.target as Node)) {
+				div!.remove()
 			}
 		})
 	}
 
-    $inspect(items)
-  
+	const ChangeSingePosition = (event: { target: { value: string | number | Date } }) => {
+		let dateType = new Date(event.target.value)
+		let newLen =
+			(new Date(dateType.getFullYear(), dateType.getMonth(), dateType.getDate()).valueOf() -
+				new Date(clickedItem!.date).valueOf()) /
+			1000 /
+			60 /
+			60 /
+			24
+		clickedItem!.len = newLen + 1
 
+        console.log(dateType.getUTCDay())
+	}
 </script>
 
 <div class="hidden flex-col space-y-6 rounded-box" bind:this={form}>
 	<div class="flex space-x-4">
-		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-warning">Edit</button>
-		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-error">Delete</button>
+		<button
+			onclick={() => {items?.splice(checkedItemPosition as number, 1); div!.remove()}}
+			class="btn btn-error">Delete</button
+		>
 	</div>
 
 	{#if clickedItem}
@@ -253,7 +259,15 @@
 		/>
 		<!-- <input type="date" bind:value={clickedItem.date} class=" w-full max-w-xs" />
          -->
-         <DateInput onchange={() => changeColumnPosition()} bind:value={clickedItem.date}  />
+		<DateInput onchange={() => changeColumnPosition()} bind:value={clickedItem.date} />
+		<DateInput
+			onchange={(e) => ChangeSingePosition(e)}
+			value={new Date(
+				clickedItem.date.getFullYear(),
+				clickedItem.date.getMonth(),
+				clickedItem.date.getDate() + clickedItem.len - 1,
+			)}
+		/>
 	{/if}
 </div>
 
@@ -265,7 +279,6 @@
 				onclick={() => {
 					year--
 					initMonth()
-					initMonthItems()
 				}}>&Lt;</button
 			>
 			<button
@@ -273,7 +286,6 @@
 				onclick={() => {
 					prev()
 					initMonth()
-					initMonthItems()
 				}}>&lt;</button
 			>
 			<div class="flex w-64 items-center justify-center space-x-3">
@@ -286,7 +298,6 @@
 				onclick={() => {
 					next()
 					initMonth()
-					initMonthItems()
 				}}>&gt;</button
 			>
 			<button
@@ -294,7 +305,6 @@
 				onclick={() => {
 					year++
 					initMonth()
-					initMonthItems()
 				}}>&Gt;</button
 			>
 		</div>
