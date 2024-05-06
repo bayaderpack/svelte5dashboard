@@ -142,6 +142,9 @@
 		initMonthItems()
 	}
 
+
+
+
 	initContent()
 
 	function findRowCol(dt: Date) {
@@ -175,7 +178,7 @@
 		}
 	}
 	let form = $state<HTMLDivElement>()
-	$inspect(form)
+	$inspect(days)
 	let clickedItem = $state<ItemProps>()
 	const contextMenu = (e: MouseEvent, item: ItemProps) => {
 		e.preventDefault()
@@ -216,6 +219,7 @@
 		<div>
 			<select bind:value={clickedItem.className}>
 				<option value="badge-primary">Primary</option>
+                <option value="badge-secondary">Secondary</option>
 				<option value="badge-warning">Warning</option>
 				<option value="badge-error">Danger</option>
 				<option value="badge-info">Info</option>
@@ -228,18 +232,18 @@
 <div class="m-auto w-[90%] max-w-[1200px] overflow-hidden rounded-box bg-base-100 shadow-md">
 	<div class="border-b border-base-200 bg-base-100 p-3 text-center">
 		<h1 class="m-0 text-xl font-semibold">
-			<button class="btn btn-ghost" onclick={() => year--}>&Lt;</button>
-			<button class="btn btn-secondary" onclick={() => prev()}>&lt;</button>
+			<button class="btn btn-ghost" onclick={() => {year--; initMonth();initMonthItems()}}>&Lt;</button>
+			<button class="btn btn-secondary" onclick={() => {prev(); initMonth();initMonthItems()}}>&lt;</button>
 			{monthNames[month]}
 			{year}
-			<button class="btn btn-secondary" onclick={() => next()}>&gt;</button>
-			<button class="btn btn-ghost" onclick={() => year++}>&Gt;</button>
+			<button class="btn btn-secondary" onclick={() => {next(); initMonth();initMonthItems()}}>&gt;</button>
+			<button class="btn btn-ghost" onclick={() => {year++; initMonth();initMonthItems()}}>&Gt;</button>
 		</h1>
 		{eventText}
 	</div>
 
 	<div
-		class="grid w-full auto-rows-[120px] grid-cols-[repeat(7,minmax(130px,1fr))] grid-rows-[50px] gap-1 overflow-auto"
+		class="grid w-full auto-rows-[120px] grid-cols-[repeat(7,minmax(130px,1fr))] grid-rows-[50px] gap-1 overflow-auto p-3"
 	>
 		{#each dayNames as header}
 			<span
@@ -280,12 +284,7 @@
       align-self: {item.isBottom ? 'end' : 'center'};"
 				>
 					{item.title}
-					{#if item.detailHeader}
-						<div class="task-detail">
-							<h2>{item.detailHeader}</h2>
-							<p>{item.detailContent}</p>
-						</div>
-					{/if}
+
 				</section>
 			{/each}{/if}
 	</div>
@@ -350,70 +349,14 @@
 	.day-disabled {
 		@apply cursor-not-allowed text-base-content;
 		background: repeating-linear-gradient(45deg, #fff, #fff 10px, #eee 10px, #eee 20px);
-
-		/* cursor: not-allowed;
-		background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fdf9ff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-		background-color: #ffffff;
-		color: rgba(152, 160, 166, 0.5); */
 	}
+    :global([data-theme='dark'] .day-disabled) {
+        background: repeating-linear-gradient(45deg, #151515, #151515 10px, #353535 10px, #353535 20px);
+    }
 
 	.task {
 		@apply relative z-[2] m-1 border-l-2 border-l-base-200 border-r-2 border-r-base-200 border-b-2 border-b-base-200 border-solid rounded-box py-1 px-4 text-left;
-		/* position: relative;
-		align-self: center;
-		z-index: 2;
-		margin: 10px;
-		border-left-width: 3px;
-		border-left-style: solid;
-		border-radius: 15px;
-		padding: 8px 12px;
-		font-size: 14px; */
 	}
 
-	.task-detail {
-		position: absolute;
-		top: calc(100% + 8px);
-		left: 0;
-		z-index: 2;
-		box-sizing: border-box;
-		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-		border: 1px solid rgba(166, 168, 179, 0.2);
-		border-radius: 14px;
-		background: #efe;
-		padding: 20px;
-		color: #100;
-	}
-	.task-detail:after,
-	.task-detail:before {
-		position: absolute;
-		bottom: 100%;
-		left: 30%;
-		border: solid transparent;
-		width: 0;
-		height: 0;
-		pointer-events: none;
-		content: ' ';
-	}
-	.task-detail:before {
-		margin-left: -8px;
-		border-width: 8px;
-		border-bottom-color: rgba(166, 168, 179, 0.2);
-	}
-	.task-detail:after {
-		margin-left: -6px;
-		border-width: 6px;
-		border-bottom-color: #fff;
-	}
-	.task-detail h2 {
-		margin: 0;
-		color: #91565d;
-		font-size: 15px;
-	}
-	.task-detail p {
-		margin-top: 4px;
-		margin-bottom: 0;
-		color: rgba(81, 86, 93, 0.7);
-		font-weight: 500;
-		font-size: 12px;
-	}
+
 </style>
