@@ -32,3 +32,11 @@ Some of interesting pages that I working right now on is the following:
 - [x] Customers list / CRUD comonent
 - [ ] Blog section
 - [ ] Jobs section
+
+
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/calendarDark.JPG "Calendar dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/CalendarLight.JPG "Calendar light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/costumersListLight.JPG "Customers list light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/costumersListDark.JPG "Customers list dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/dashboardLight.JPG "dashboard light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/DashboardDark.JPG "dashboard dark version")
