@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { unknown } from 'zod'
+
 	var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 	let monthNames = [
 		'January',
@@ -44,9 +46,6 @@
 		startCol?: number
 		startRow?: number
 	}
-	interface ItemsProps {
-		items: Array<ItemProps>
-	}
 	let items = $state<Array<ItemProps>>()
 
 	function initMonthItems() {
@@ -56,22 +55,22 @@
 		items = [
 			{
 				title: '11:00 Task Early in month',
-				className: 'task--primary',
+				className: 'badge-primary',
 				date: new Date(y, m, randInt(6)),
 				len: randInt(4) + 1,
 			},
-			{ title: '7:30 Wk 2 tasks', className: 'task--warning', date: d1, len: randInt(4) + 2 },
+			{ title: '7:30 Wk 2 tasks', className: 'badge-secondary', date: d1, len: randInt(4) + 2 },
 			{
 				title: 'Overlapping Stuff (isBottom:true)',
 				date: d1,
-				className: 'task--info',
+				className: 'badge-warning',
 				len: 4,
 				isBottom: true,
 			},
 			{
 				title: '10:00 More Stuff to do',
 				date: new Date(y, m, randInt(7) + 14),
-				className: 'task--info',
+				className: 'badge-info',
 				len: randInt(4) + 1,
 				detailHeader: 'Difficult',
 				detailContent: 'But not especially so',
@@ -79,7 +78,7 @@
 			{
 				title: 'All day task',
 				date: new Date(y, m, randInt(7) + 21),
-				className: 'task--danger',
+				className: 'badge-error',
 				len: 1,
 				vlen: 2,
 			},
@@ -99,6 +98,11 @@
 				i.startRow = rc.row
 			}
 		}
+	}
+
+	const randomTaskClass = (item: ItemProps) => {
+		let taskClass = `badge-${['primary', 'error', 'warning', 'info'][Math.floor(Math.random() * 4)]}`
+		item.className = taskClass
 	}
 
 	function initMonth() {
@@ -170,25 +174,76 @@
 			month--
 		}
 	}
+	let form = $state<HTMLDivElement>()
+	$inspect(form)
+	let clickedItem = $state<ItemProps>()
+	const contextMenu = (e: MouseEvent, item: ItemProps) => {
+		e.preventDefault()
+		var div = document.createElement('div')
+		clickedItem = item
+
+		form?.classList.remove('hidden')
+		form?.classList.add('flex')
+		div.appendChild(form!)
+
+		div.style.position = 'absolute'
+		div.style.top = e.pageY + 'px'
+		div.style.left = e.pageX + 'px'
+		div.style.background = '#fff'
+		div.style.padding = '10px'
+		div.style.border = '1px solid #000'
+		div.style.borderRadius = '5px'
+		div.style.zIndex = '100'
+		div.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)'
+
+		document.body.appendChild(div)
+		//if click outside of div, remove it
+		document.addEventListener('click', function (ev) {
+			if (!div.contains(ev.target as Node)) {
+				div.remove()
+			}
+		})
+	}
 </script>
 
-<div class="calendar-container">
-	<div class="calendar-header">
-		<h1>
-			<button onclick={() => year--}>&Lt;</button>
-			<button onclick={() => prev()}>&lt;</button>
+<div class="hidden flex-col" bind:this={form}>
+	<div class="flex">
+		<button onclick={() => randomTaskClass(clickedItem!)}>Edit</button>
+		<button onclick={() => randomTaskClass(clickedItem!)}>Delete</button>
+	</div>
+
+	{#if clickedItem}
+		<div>
+			<select bind:value={clickedItem.className}>
+				<option value="badge-primary">Primary</option>
+				<option value="badge-warning">Warning</option>
+				<option value="badge-error">Danger</option>
+				<option value="badge-info">Info</option>
+			</select>
+		</div>
+		<input type="text" placeholder="Title" bind:value={clickedItem.title} />
+	{/if}
+</div>
+
+<div class="m-auto w-[90%] max-w-[1200px] overflow-hidden rounded-box bg-base-100 shadow-md">
+	<div class="border-b border-base-200 bg-base-100 p-3 text-center">
+		<h1 class="m-0 text-xl font-semibold">
+			<button class="btn btn-ghost" onclick={() => year--}>&Lt;</button>
+			<button class="btn btn-secondary" onclick={() => prev()}>&lt;</button>
 			{monthNames[month]}
 			{year}
-			<button onclick={() => next()}>&gt;</button>
-			<button onclick={() => year++}>&Gt;</button>
+			<button class="btn btn-secondary" onclick={() => next()}>&gt;</button>
+			<button class="btn btn-ghost" onclick={() => year++}>&Gt;</button>
 		</h1>
 		{eventText}
 	</div>
 
-	<div class="calendar">
+	<div
+		class="grid w-full auto-rows-[120px] grid-cols-[repeat(7,minmax(130px,1fr))] grid-rows-[50px] gap-1 overflow-auto"
+	>
 		{#each dayNames as header}
 			<span
-				class="day-name"
+				class="text-center text-xl font-semibold uppercase text-error"
 				role="button"
 				tabindex="0"
 				onkeydown={() => console.log(header)}
@@ -214,6 +269,7 @@
 		{#if items}
 			{#each items as item}
 				<section
+					oncontextmenu={(e) => contextMenu(e, item)}
 					role="button"
 					tabindex="0"
 					onkeydown={() => console.log(item)}
@@ -244,59 +300,15 @@
           /> -->
 </div>
 
-<style>
-	.calendar-container {
-		margin: auto;
-		box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
-		background: #fff;
-		width: 90%;
-		max-width: 1200px;
-		overflow: hidden;
-	}
-	.calendar-header {
-		border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-		background: #eef;
-		padding: 20px 0;
-		text-align: center;
-	}
-	.calendar-header h1 {
-		margin: 0;
-		font-size: 18px;
-	}
-	.calendar-header button {
-		cursor: pointer;
-		outline: 0;
-		border: 1px;
-		background: #eef;
-		padding: 6;
-		color: rgba(81, 86, 93, 0.7);
-	}
-	.calendar {
-		display: grid;
-		grid-template-rows: 50px;
-		grid-template-columns: repeat(7, minmax(120px, 1fr));
-		grid-auto-rows: 120px;
-		width: 100%;
-		overflow: auto;
-	}
+<style lang="postcss">
 	.day {
-		position: relative;
-		z-index: 1;
-		box-sizing: border-box;
-		border-right: 1px solid rgba(166, 168, 179, 0.12);
-		border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-		padding: 14px 20px;
-		color: #98a0a6;
-		font-size: 14px;
-		letter-spacing: 1px;
-		text-align: right;
+		@apply relative z-[1] box-border border-r border-b border-base-200 dark:border-base-content py-3 px-5 rounded-box text-right;
 	}
 	.day:nth-of-type(7n + 7) {
-		border-right: 0;
+		@apply border-r-0;
 	}
 	.day:nth-of-type(n + 1):nth-of-type(-n + 7) {
-		grid-row: 1;
+		@apply grid-rows-1;
 	}
 	.day:nth-of-type(n + 8):nth-of-type(-n + 14) {
 		grid-row: 2;
@@ -334,24 +346,20 @@
 	.day:nth-of-type(7n + 7) {
 		grid-column: 7/7;
 	}
-	.day-name {
-		border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-		color: #e9a1a7;
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 50px;
-		text-align: center;
-		text-transform: uppercase;
-	}
+
 	.day-disabled {
-		cursor: not-allowed;
+		@apply cursor-not-allowed text-base-content;
+		background: repeating-linear-gradient(45deg, #fff, #fff 10px, #eee 10px, #eee 20px);
+
+		/* cursor: not-allowed;
 		background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fdf9ff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
 		background-color: #ffffff;
-		color: rgba(152, 160, 166, 0.5);
+		color: rgba(152, 160, 166, 0.5); */
 	}
 
 	.task {
-		position: relative;
+		@apply relative z-[2] m-1 border-l-2 border-l-base-200 border-r-2 border-r-base-200 border-b-2 border-b-base-200 border-solid rounded-box py-1 px-4 text-left;
+		/* position: relative;
 		align-self: center;
 		z-index: 2;
 		margin: 10px;
@@ -359,35 +367,9 @@
 		border-left-style: solid;
 		border-radius: 15px;
 		padding: 8px 12px;
-		font-size: 14px;
+		font-size: 14px; */
 	}
-	.task--warning {
-		margin-top: -5px;
-		border-left-color: #fdb44d;
-		background: #fef0db;
-		color: #fc9b10;
-	}
-	.task--danger {
-		grid-row: 3;
-		grid-column: 2 / span 3;
-		margin-top: 15px;
-		border-left-color: #fa607e;
-		background: rgba(253, 197, 208, 0.7);
-		color: #f8254e;
-	}
-	.task--info {
-		margin-top: 15px;
-		border-left-color: #4786ff;
-		background: rgba(218, 231, 255, 0.7);
-		color: #0a5eff;
-	}
-	.task--primary {
-		box-shadow: 0 10px 14px rgba(71, 134, 255, 0.4);
-		border: 0;
-		border-radius: 14px;
-		background: #4786ff;
-		color: #f00;
-	}
+
 	.task-detail {
 		position: absolute;
 		top: calc(100% + 8px);
