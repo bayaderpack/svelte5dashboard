@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { unknown } from 'zod'
+	import dayjs from 'dayjs'
+	import DateInput from './DateInput.svelte'
 
 	var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 	let monthNames = [
@@ -51,15 +52,16 @@
 	function initMonthItems() {
 		let y = year
 		let m = month
-		let d1 = new Date(y, m, randInt(7) + 7)
+		let d1 = new Date(y, m, 3 + 7)
+
 		items = [
 			{
 				title: '11:00 Task Early in month',
 				className: 'badge-primary',
-				date: new Date(y, m, randInt(6)),
-				len: randInt(4) + 1,
+				date: new Date(y, m, 4),
+				len: 2 + 1,
 			},
-			{ title: '7:30 Wk 2 tasks', className: 'badge-secondary', date: d1, len: randInt(4) + 2 },
+			{ title: '7:30 Wk 2 tasks', className: 'badge-secondary', date: d1, len: 3 + 2 },
 			{
 				title: 'Overlapping Stuff (isBottom:true)',
 				date: d1,
@@ -69,15 +71,15 @@
 			},
 			{
 				title: '10:00 More Stuff to do',
-				date: new Date(y, m, randInt(7) + 14),
+				date: new Date(y, m, 6 + 14),
 				className: 'badge-info',
-				len: randInt(4) + 1,
+				len: 2 + 1,
 				detailHeader: 'Difficult',
 				detailContent: 'But not especially so',
 			},
 			{
 				title: 'All day task',
-				date: new Date(y, m, randInt(7) + 21),
+				date: new Date(y, m, 6 + 21),
 				className: 'badge-error',
 				len: 1,
 				vlen: 2,
@@ -99,6 +101,21 @@
 			}
 		}
 	}
+
+    const changeColumnPosition = () => {
+        for (let i of items!) {
+			let rc = findRowCol(i.date)
+			if (rc == null) {
+				console.log('didn`t find date for ', i)
+				console.log(i.date)
+				console.log(days)
+				i.startCol = i.startRow = 0
+			} else {
+				i.startCol = rc.col
+				i.startRow = rc.row
+			}
+		}
+    }
 
 	const randomTaskClass = (item: ItemProps) => {
 		let taskClass = `badge-${['primary', 'error', 'warning', 'info'][Math.floor(Math.random() * 4)]}`
@@ -141,9 +158,6 @@
 		initMonth()
 		initMonthItems()
 	}
-
-
-
 
 	initContent()
 
@@ -189,12 +203,19 @@
 		form?.classList.add('flex')
 		div.appendChild(form!)
 
-
 		div.style.top = e.pageY + 'px'
 		div.style.left = e.pageX + 'px'
 
-
-        div.classList.add('bg-base-200','rounded-box','shadow-md','border','border-base-200','absolute','z-[100]','p-4')
+		div.classList.add(
+			'bg-base-200',
+			'rounded-box',
+			'shadow-md',
+			'border',
+			'border-base-200',
+			'absolute',
+			'z-[100]',
+			'p-4',
+		)
 
 		document.body.appendChild(div)
 		//if click outside of div, remove it
@@ -204,37 +225,79 @@
 			}
 		})
 	}
+
+    $inspect(items)
+  
+
 </script>
 
-<div class="hidden flex-col space-y-6 rounded-box " bind:this={form}>
+<div class="hidden flex-col space-y-6 rounded-box" bind:this={form}>
 	<div class="flex space-x-4">
 		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-warning">Edit</button>
 		<button onclick={() => randomTaskClass(clickedItem!)} class="btn btn-error">Delete</button>
 	</div>
 
 	{#if clickedItem}
-		
-            <select class="select select-bordered w-full max-w-xs"  bind:value={clickedItem.className}>
-				<option value="badge-primary">Primary</option>
-                <option value="badge-secondary">Secondary</option>
-				<option value="badge-warning">Warning</option>
-				<option value="badge-error">Danger</option>
-				<option value="badge-info">Info</option>
-              </select>
-		<input type="text" placeholder="Title" bind:value={clickedItem.title} class="input input-bordered w-full max-w-xs" />
+		<select class="select select-bordered w-full max-w-xs" bind:value={clickedItem.className}>
+			<option value="badge-primary">Primary</option>
+			<option value="badge-secondary">Secondary</option>
+			<option value="badge-warning">Warning</option>
+			<option value="badge-error">Danger</option>
+			<option value="badge-info">Info</option>
+		</select>
+		<input
+			type="text"
+			placeholder="Title"
+			bind:value={clickedItem.title}
+			class="input input-bordered w-full max-w-xs"
+		/>
+		<!-- <input type="date" bind:value={clickedItem.date} class=" w-full max-w-xs" />
+         -->
+         <DateInput onchange={() => changeColumnPosition()} bind:value={clickedItem.date}  />
 	{/if}
 </div>
 
 <div class="m-auto w-[90%] max-w-[1200px] overflow-hidden rounded-box bg-base-100 shadow-md">
 	<div class="border-b border-base-200 bg-base-100 p-3 text-center">
-		<h1 class="m-0 text-xl font-semibold">
-			<button class="btn btn-ghost" onclick={() => {year--; initMonth();initMonthItems()}}>&Lt;</button>
-			<button class="btn btn-secondary" onclick={() => {prev(); initMonth();initMonthItems()}}>&lt;</button>
-			{monthNames[month]}
-			{year}
-			<button class="btn btn-secondary" onclick={() => {next(); initMonth();initMonthItems()}}>&gt;</button>
-			<button class="btn btn-ghost" onclick={() => {year++; initMonth();initMonthItems()}}>&Gt;</button>
-		</h1>
+		<div class="m-0 flex items-center justify-center space-x-5 text-xl font-semibold">
+			<button
+				class="btn btn-ghost"
+				onclick={() => {
+					year--
+					initMonth()
+					initMonthItems()
+				}}>&Lt;</button
+			>
+			<button
+				class="btn btn-secondary"
+				onclick={() => {
+					prev()
+					initMonth()
+					initMonthItems()
+				}}>&lt;</button
+			>
+			<div class="flex w-64 items-center justify-center space-x-3">
+				<h1>{monthNames[month]}</h1>
+				<h1>{year}</h1>
+			</div>
+
+			<button
+				class="btn btn-secondary"
+				onclick={() => {
+					next()
+					initMonth()
+					initMonthItems()
+				}}>&gt;</button
+			>
+			<button
+				class="btn btn-ghost"
+				onclick={() => {
+					year++
+					initMonth()
+					initMonthItems()
+				}}>&Gt;</button
+			>
+		</div>
 		{eventText}
 	</div>
 
@@ -280,11 +343,9 @@
       align-self: {item.isBottom ? 'end' : 'center'};"
 				>
 					{item.title}
-
 				</section>
 			{/each}{/if}
 	</div>
-
 </div>
 
 <style lang="postcss">
@@ -338,13 +399,11 @@
 		@apply cursor-not-allowed text-base-content;
 		background: repeating-linear-gradient(45deg, #fff, #fff 10px, #eee 10px, #eee 20px);
 	}
-    :global([data-theme='dark'] .day-disabled) {
-        background: repeating-linear-gradient(45deg, #151515, #151515 10px, #353535 10px, #353535 20px);
-    }
+	:global([data-theme='dark'] .day-disabled) {
+		background: repeating-linear-gradient(45deg, #151515, #151515 10px, #353535 10px, #353535 20px);
+	}
 
 	.task {
 		@apply relative z-[2] m-1 border-l-2 border-l-base-200 border-r-2 border-r-base-200 border-b-2 border-b-base-200 border-solid rounded-box py-1 px-4 text-left;
 	}
-
-
 </style>
