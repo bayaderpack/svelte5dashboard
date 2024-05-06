@@ -34,9 +34,9 @@ Some of interesting pages that I working right now on is the following:
 - [ ] Jobs section
 
 
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/calendarDark.JPG "Calendar dark version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/CalendarLight.JPG "Calendar light version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/costumersListLight.JPG "Customers list light version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/costumersListDark.JPG "Customers list dark version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/dashboardLight.JPG "dashboard light version")
-![alt text](https://github.com/bayaderpack/svelte5dashboard/raw/master/gitimages/DashboardDark.JPG "dashboard dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/calendarDark.JPG "Calendar dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/CalendarLight.JPG "Calendar light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/costumersListLight.JPG "Customers list light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/costumersListDark.JPG "Customers list dark version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/dashboardLight.JPG "dashboard light version")
+![alt text](https://github.com/bayaderpack/svelte5dashboard/blob/main/gitimages/DashboardDark.JPG "dashboard dark version")
