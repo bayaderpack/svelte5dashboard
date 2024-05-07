@@ -2,9 +2,10 @@
 	import dayjs from 'dayjs'
 	interface MyProps {
 		value: Date
-		onchange: (e?: any) => void
+		onchange: (e?: any) => void,
+        min?: Date
 	}
-	let { value = $bindable(), onchange = $bindable() }: MyProps = $props()
+	let { value = $bindable(), onchange = $bindable(), min }: MyProps = $props()
 
 	let proxy = {
 		get value() {
@@ -20,6 +21,7 @@
 </script>
 
 <input
+    min={min ? dayjs(min).format('YYYY-MM-DD') : undefined}
 	type="date"
 	bind:value={proxy.value}
 	{onchange}

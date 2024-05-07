@@ -233,7 +233,7 @@
 			</ul>
 		</div>
 		<div class="navbar-end space-x-2">
-			<button onclick={window.toggleTheme} title="Toggle Theme" aria-label="Toggle theme"><ThemeToggleIcon class="w-4"/></button>
+			<button onclick={window.toggleTheme} class="btn btn-ghost btn-circle" title="Toggle Theme" aria-label="Toggle theme"><ThemeToggleIcon class="w-4"/></button>
 			<button class="btn btn-circle btn-ghost hidden lg:flex" aria-label="Search" title="Search">
 				<Icon icon="bi:search" class="text-2xl font-semibold"></Icon>
 			</button>

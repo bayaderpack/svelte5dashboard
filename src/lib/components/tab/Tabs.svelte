@@ -69,8 +69,6 @@
 		selected: writable<HTMLElement>(),
 	}
 
-	let dividerBool = $derived(['full', 'pill'].includes(style) ? false : divider)
-
 	setContext('ctx', ctx)
 
 	function init(node: HTMLElement) {

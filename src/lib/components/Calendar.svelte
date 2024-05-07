@@ -2,6 +2,7 @@
 	import dayjs from 'dayjs'
 	import DateInput from './DateInput.svelte'
 
+
 	var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 	let monthNames = [
 		'January',
@@ -30,7 +31,6 @@
 		date: Date
 	}
 	var days = $state<Array<DaysProps>>()
-
 
 	interface ItemProps {
 		title: string
@@ -220,6 +220,9 @@
 		})
 	}
 
+	let clickedItemStartDayOfWeek = $derived(clickedItem?.date.getDay())
+
+	let isItMoreThanWeek = $derived(6 - clickedItemStartDayOfWeek!)
 	const ChangeSingePosition = (event: { target: { value: string | number | Date } }) => {
 		let dateType = new Date(event.target.value)
 		let newLen =
@@ -229,10 +232,32 @@
 			60 /
 			60 /
 			24
-		clickedItem!.len = newLen + 1
 
-        console.log(dateType.getUTCDay())
+		if (clickedItem != undefined) {
+			if (!(newLen > isItMoreThanWeek)) {
+				clickedItem!.len = newLen + 1
+			} else {
+				clickedItem!.len = isItMoreThanWeek + 1
+				let newItem = {
+					title: clickedItem!.title,
+					className: clickedItem!.className,
+					date: new Date(
+						clickedItem!.date.getFullYear(),
+						clickedItem!.date.getMonth(),
+						clickedItem!.date.getDate() + isItMoreThanWeek+1,
+					),
+					len: newLen - isItMoreThanWeek,
+					isBottom: true
+				}
+				items?.push(newItem)
+				changeColumnPosition()
+			}
+		}
 	}
+
+	// $effect(() => {
+	// 	console.log(clickedItem?.len - 1 > isItMoreThanWeek)
+	// })
 </script>
 
 <div class="hidden flex-col space-y-6 rounded-box" bind:this={form}>
@@ -261,6 +286,7 @@
          -->
 		<DateInput onchange={() => changeColumnPosition()} bind:value={clickedItem.date} />
 		<DateInput
+			min={clickedItem.date}
 			onchange={(e) => ChangeSingePosition(e)}
 			value={new Date(
 				clickedItem.date.getFullYear(),
@@ -311,9 +337,7 @@
 		{eventText}
 	</div>
 
-	<div
-		class="grid w-full auto-rows-[120px] grid-cols-[repeat(7,minmax(130px,1fr))] grid-rows-[50px] gap-1 overflow-auto p-3"
-	>
+	<div class="grid w-full auto-rows-[120px] grid-cols-7 grid-rows-[50px] gap-1 overflow-auto p-3">
 		{#each dayNames as header}
 			<span
 				class="text-center text-xl font-semibold uppercase text-error"

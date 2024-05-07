@@ -10,6 +10,7 @@
 	import Filters from '$lib/components/filters/Filters.svelte'
 	import Filter from '$lib/components/filters/Filter.svelte'
 	import Icon from '@iconify/svelte'
+	import ProductCard from '$lib/components/ProductCard.svelte'
 </script>
 
 <section>
@@ -31,7 +32,7 @@
 		</div>
 
 		<div class="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
-			<div class="hidden space-y-4 lg:block">
+			<div class="-mt-5 hidden space-y-4 lg:block">
 				<div>
 					<p class="block text-xs font-medium text-base-content">Filters</p>
 
@@ -62,77 +63,17 @@
 			</div>
 
 			<div class="lg:col-span-3">
-				<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					<li>
-						<a href="/" class="group block overflow-hidden">
-							<img
-								src="https://bayaderpack.com/_next/image?url=https%3A%2F%2Fadmin.bayaderpack.com%2Fmedia%2Fproducts%2Fbags%2Finvercote-bag%2Fwrap_paper_large.jpg&w=384&q=75"
-								alt=""
-								class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-							/>
-
-							<div class="relative bg-base-100 pt-3">
-								<h3
-									class="text-xs text-base-content group-hover:underline group-hover:underline-offset-4"
-								>
-									Basic Tee
-								</h3>
-
-								<p class="mt-2">
-									<span class="sr-only"> Regular Price </span>
-
-									<span class="tracking-wider text-base-content"> £24.00 GBP </span>
-								</p>
-							</div>
-						</a>
+				<ul class="grid gap-4 grid-cols-1 lg:grid-cols-3 items-stretch">
+					<li class="h-full">
+						<ProductCard title="Pizza box" price={100} link="/"></ProductCard>
 					</li>
 
-					<li>
-						<a href="/" class="group block overflow-hidden">
-							<img
-								src="https://bayaderpack.com/_next/image?url=https%3A%2F%2Fadmin.bayaderpack.com%2Fmedia%2Fproducts%2Fbags%2Finvercote-bag%2Fwrap_paper_large.jpg&w=384&q=75"
-								alt=""
-								class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-							/>
-
-							<div class="relative bg-base-100 pt-3">
-								<h3
-									class="text-xs text-base-content group-hover:underline group-hover:underline-offset-4"
-								>
-									Basic Tee
-								</h3>
-
-								<p class="mt-2">
-									<span class="sr-only"> Regular Price </span>
-
-									<span class="tracking-wider text-base-content"> £24.00 GBP </span>
-								</p>
-							</div>
-						</a>
+					<li class="h-full">
+						<ProductCard title="Pizza box2"  link="/"></ProductCard>
 					</li>
 
-					<li>
-						<a href="/" class="group block overflow-hidden">
-							<img
-								src="https://bayaderpack.com/_next/image?url=https%3A%2F%2Fadmin.bayaderpack.com%2Fmedia%2Fproducts%2Fbags%2Finvercote-bag%2Fwrap_paper_large.jpg&w=384&q=75"
-								alt=""
-								class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-							/>
-
-							<div class="relative bg-base-100 pt-3">
-								<h3
-									class="text-xs text-base-content group-hover:underline group-hover:underline-offset-4"
-								>
-									Basic Tee
-								</h3>
-
-								<p class="mt-2">
-									<span class="sr-only"> Regular Price </span>
-
-									<span class="tracking-wider text-base-content"> £24.00 GBP </span>
-								</p>
-							</div>
-						</a>
+					<li class="h-full">
+						<ProductCard title="Pizza box3" price={3100} link="/" tags={['Plain', 'Gold']}></ProductCard>
 					</li>
 				</ul>
 			</div>
