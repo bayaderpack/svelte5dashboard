@@ -230,6 +230,14 @@
 						Products
 					</a>
 				</li>
+				<li>
+					<a
+						href="/contact-us"
+						class="t transition-all duration-300 hover:bg-transparent hover:text-primary"
+					>
+						Contact us
+					</a>
+				</li>
 			</ul>
 		</div>
 		<div class="navbar-end space-x-2">
