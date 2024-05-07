@@ -10,29 +10,29 @@
 	let searchText = ''
 	let filteredCountries = countries
 
-	function handleCountryCodeChange(event) {
-		selectedCountryCode = event.target.value
-		phoneNumber = ''
-		searchText = ''
-		filteredCountries = countries.filter(
-			(country) =>
-				country.code.startsWith(selectedCountryCode) ||
-				country.name.toLowerCase().startsWith(searchText.toLowerCase()),
-		)
-	}
+	// function handleCountryCodeChange(event) {
+	// 	selectedCountryCode = event.target.value
+	// 	phoneNumber = ''
+	// 	searchText = ''
+	// 	filteredCountries = countries.filter(
+	// 		(country) =>
+	// 			country.code.startsWith(selectedCountryCode) ||
+	// 			country.name.toLowerCase().startsWith(searchText.toLowerCase()),
+	// 	)
+	// }
 
-	function handleSearchChange(event) {
-		searchText = event.target.value
-		filteredCountries = countries.filter(
-			(country) =>
-				country.code.startsWith(selectedCountryCode) ||
-				country.name.toLowerCase().startsWith(searchText.toLowerCase()),
-		)
-	}
+	// function handleSearchChange(event) {
+	// 	searchText = event.target.value
+	// 	filteredCountries = countries.filter(
+	// 		(country) =>
+	// 			country.code.startsWith(selectedCountryCode) ||
+	// 			country.name.toLowerCase().startsWith(searchText.toLowerCase()),
+	// 	)
+	// }
 
-	function handlePhoneNumberChange(event) {
-		phoneNumber = event.target.value
-	}
+	// function handlePhoneNumberChange(event) {
+	// 	phoneNumber = event.target.value
+	// }
 </script>
 
 <div
@@ -73,7 +73,7 @@
 						<p class="prose text-sm">Phone</p>
 						<div class="relative flex">
 							<div
-								class=" relative flex w-full border border-gray-300 px-2 ring-offset-2 focus-within:rounded-sm focus-within:ring-2 focus-within:ring-gray-300 active:rounded-sm active:ring-2 active:ring-gray-300"
+								class=" relative flex w-full rounded-box border border-gray-300 px-2 ring-offset-2 focus-within:rounded-box focus-within:ring-2 focus-within:ring-gray-300 active:rounded-box active:ring-2 active:ring-gray-300"
 							>
 								<button
 									type="button"
@@ -102,10 +102,7 @@
 													open = false
 												}}
 											>
-												<img
-													src={country.flag ? `flags/${country.code.toLowerCase()}.png` : ''}
-													alt=""
-												/>
+												<Icon icon={`flagpack:${country.code.toLowerCase()}`} class="mr-3"></Icon>
 												<p>{country.name}</p>
 												<p>+{country.dial_code}</p>
 											</div>
