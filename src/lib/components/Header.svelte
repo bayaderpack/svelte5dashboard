@@ -61,7 +61,7 @@
 			'easy-in-out navbar  transition-all duration-300 xl:px-24',
 		)}
 	>
-		<div class="navbar-start md:hidden">
+		<div class="navbar-start " class:md:hidden={!logo}>
 			<div class="dropdown">
 				<div tabIndex={0} role="button" class="btn btn-ghost lg:hidden">
 					<svg
