@@ -75,3 +75,9 @@
 		</div>
 	{/if}
 </li>
+
+<style lang="postcss">
+	.active {
+		@apply bg-base-200;
+	}
+</style>

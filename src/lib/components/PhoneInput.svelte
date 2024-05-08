@@ -49,7 +49,7 @@
 			name="email"
 			type="tel"
 			placeholder="Phone number"
-			class="  my-1 w-full  appearance-none px-6 focus:outline-none"
+			class="my-1 w-full  appearance-none px-6 focus:outline-none"
 		/>
 	</div>
 </div>
