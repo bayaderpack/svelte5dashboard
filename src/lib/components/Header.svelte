@@ -100,14 +100,7 @@
 										All Menu
 									</a>
 								</li>
-								<li>
-									<a
-										href="logs"
-										class="transition-all duration-300 hover:bg-transparent hover:text-primary"
-									>
-										Logs
-									</a>
-								</li>
+
 								<li>
 									<a
 										href="pizza"
@@ -186,14 +179,6 @@
 								class="transition-all duration-300 hover:bg-transparent hover:text-primary"
 							>
 								{m.home()}
-							</a>
-						</li>
-						<li>
-							<a
-								href="/logs"
-								class="transition-all duration-300 hover:bg-transparent hover:text-primary"
-							>
-								Logs
 							</a>
 						</li>
 						<li>
