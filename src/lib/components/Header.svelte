@@ -217,7 +217,7 @@
 				<li>
 					<a
 						href="/about"
-						class="t transition-all duration-300 hover:bg-transparent hover:text-primary"
+						class=" transition-all duration-300 hover:bg-transparent hover:text-primary"
 					>
 						{m.about()}
 					</a>
@@ -225,7 +225,7 @@
 				<li>
 					<a
 						href="/products"
-						class="t transition-all duration-300 hover:bg-transparent hover:text-primary"
+						class="transition-all duration-300 hover:bg-transparent hover:text-primary"
 					>
 						Products
 					</a>
@@ -233,7 +233,7 @@
 				<li>
 					<a
 						href="/contact-us"
-						class="t transition-all duration-300 hover:bg-transparent hover:text-primary"
+						class="transition-all duration-300 hover:bg-transparent hover:text-primary"
 					>
 						Contact us
 					</a>
