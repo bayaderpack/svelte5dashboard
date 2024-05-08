@@ -1,5 +1,6 @@
 <script>
     import Crud from "$lib/components/Crud.svelte"
+	import SettingsPage from "$lib/components/SettingsPage.svelte"
 
 
     let data = $state([
@@ -16,4 +17,6 @@
 
 </script>
 
-<Crud headers={["Name","Code"]} {data} link="/customers/supliers/add" isFull={true} />
+<SettingsPage title="Languages">
+    <Crud headers={["Name","Code"]} {data} link="/customers/supliers/add" isFull={true} />
+</SettingsPage>

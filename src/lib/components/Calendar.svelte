@@ -275,6 +275,14 @@
 			<option value="badge-error">Danger</option>
 			<option value="badge-info">Info</option>
 		</select>
+
+		<select class="select select-bordered w-full max-w-xs">
+			<option selected disabled>Assign to</option>
+			<option value="badge-secondary">Worker 1</option>
+			<option value="badge-warning">Worker 2</option>
+			<option value="badge-error">Worker 3</option>
+			<option value="badge-info">Worker 4</option>
+		</select>
 		<input
 			type="text"
 			placeholder="Title"
@@ -296,7 +304,7 @@
 	{/if}
 </div>
 
-<div class="m-auto w-[90%] max-w-[1200px] overflow-hidden rounded-box bg-base-100 shadow-md">
+<div class="m-auto w-full overflow-hidden rounded-box bg-base-100 shadow-md">
 	<div class="border-b border-base-200 bg-base-100 p-3 text-center">
 		<div class="m-0 flex items-center justify-center space-x-5 text-xl font-semibold">
 			<button

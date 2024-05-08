@@ -1,6 +1,10 @@
 <script>
 	import Calendar from "$lib/components/Calendar.svelte"
+	import SettingsPage from "$lib/components/SettingsPage.svelte"
 
 </script>
 
-<Calendar></Calendar>
+
+<SettingsPage title="Appointments">
+	<Calendar></Calendar>
+</SettingsPage>

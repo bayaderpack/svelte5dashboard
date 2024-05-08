@@ -22,13 +22,13 @@
 		>
 		{#if open}
 			<div
-				class="w-92 absolute top-full h-72 overflow-auto rounded-box bg-white px-6 py-4 shadow-lg"
+				class="w-92 absolute top-full h-72 overflow-auto rounded-box bg-base-100 px-6 py-4 shadow-lg"
 			>
 				{#each countries as country}
 					<div
 						tabindex="0"
 						role="button"
-						class="flex items-center space-x-3 space-y-4 py-2 hover:bg-gray-100"
+						class="flex items-center space-x-3 space-y-4 py-2 hover:bg-base-200"
 						on:click={() => {
 							selected = country
 							open = false

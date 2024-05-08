@@ -1,5 +1,6 @@
 <script>
     import Crud from "$lib/components/Crud.svelte"
+	import SettingsPage from "$lib/components/SettingsPage.svelte"
 
 
     let data = $state([
@@ -25,4 +26,7 @@
 
 </script>
 
-<Crud headers={["Name","Single Factor"]} {data} link="/customers/supliers/add" isFull={true} />
+
+<SettingsPage title="Units">
+    <Crud headers={["Name","Single Factor"]} {data} link="/customers/supliers/add" isFull={true} />
+</SettingsPage>

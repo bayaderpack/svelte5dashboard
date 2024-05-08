@@ -9,9 +9,10 @@
 </script>
 
 <li>
-	<label for={idName} class="inline-flex items-center gap-2">
-		<input type="checkbox" id={idName} class="size-5 rounded-box border-base-300" />
-
-		<span class="text-sm font-medium text-base-content"> {name} </span>
-	</label>
+	<div class="form-control">
+		<label class="label cursor-pointer" for={idName}>
+			<input type="checkbox" checked class="checkbox-primary checkbox" id={idName} />
+			<span class="label-text">{name}</span>
+		</label>
+	</div>
 </li>

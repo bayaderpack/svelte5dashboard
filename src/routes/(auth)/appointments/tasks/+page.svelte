@@ -1,5 +1,9 @@
 <script>
+	import SettingsPage from "$lib/components/SettingsPage.svelte"
 	import Task from "$lib/components/Task.svelte"
 
 </script>
-<Task />
+
+<SettingsPage title="Tasks">
+	<Task />
+</SettingsPage>

@@ -1,5 +1,6 @@
 <script>
     import Crud from "$lib/components/Crud.svelte"
+	import SettingsPage from "$lib/components/SettingsPage.svelte"
 
 
     let data = $state([
@@ -24,4 +25,7 @@
 
 </script>
 
-<Crud headers={["ID","Name"]} {data} link="/customers/groups/add" />
+
+<SettingsPage title="Customers groups">
+    <Crud headers={["ID","Name"]} {data} link="/customers/groups/add" />
+</SettingsPage>
