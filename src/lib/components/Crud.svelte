@@ -10,8 +10,13 @@
 		headers: Array<string>
 		data: Array<any>
 		link: string
+		isSearchDisabled?: boolean
+		isSortDisabled?: boolean
+		isPaginationDisabled?: boolean,
+		isFull?: boolean
 	}
-	const { headers, data, link }: MyProps = $props()
+	const { headers, data, link, isPaginationDisabled, isSearchDisabled, isSortDisabled, isFull }: MyProps =
+		$props()
 	let search = $state('')
 	const startIndex = $derived((activePage - 1) * rowsPerPage)
 	const endIndex = $derived(startIndex + rowsPerPage)
@@ -78,24 +83,28 @@
 
 <div class="flex flex-col">
 	<div class="container">
-		<label class="input input-bordered flex max-w-56 items-center gap-2">
-			<input type="text" class="grow" placeholder="Search" bind:value={search} />
-			<Icon icon="bi:search"></Icon>
-		</label>
+		{#if !isSearchDisabled && !isFull}
+			<label class="input input-bordered flex max-w-56 items-center gap-2">
+				<input type="text" class="grow" placeholder="Search" bind:value={search} />
+				<Icon icon="bi:search"></Icon>
+			</label>
+		{/if}
+
 		<a href={link} class="btn btn-success float-right">Add new</a>
 		{#if updateDataAndPagination.length > 0}
 			<table
 				class=" my-5 flex w-full flex-row overflow-hidden rounded-lg sm:bg-base-100 sm:shadow-md"
 			>
 				<thead class="text-base-content">
-					{#each updateDataAndPagination as rows}
+					{#each !isFull ? updateDataAndPagination : data as rows}
 						<tr
 							class="flex-no wrap mb-2 flex flex-col rounded-l-lg bg-base-200 sm:mb-0 sm:table-row sm:rounded-none"
 						>
 							{#each headers as header}
 								<th
 									class="border-r border-base-300 p-3 text-left"
-									onclick={() => sortFields(header)}>{header}</th
+									class:w-20={header == 'ID'}
+									onclick={() => !isSortDisabled ? sortFields(header) : ''}>{header == 'ID' ? '#' : header}</th
 								>
 							{/each}
 							<th class="w-[100px] p-6 text-left md:p-3">Actions</th>
@@ -103,18 +112,20 @@
 					{/each}
 				</thead>
 				<tbody class="flex-1 sm:flex-none">
-					{#each updateDataAndPagination as dat, ind}
-						<tr class="flex-no wrap mb-2 flex flex-col sm:mb-0 sm:table-row">
+					{#each !isFull ? updateDataAndPagination : data as dat, ind}
+						<tr class="flex-no wrap group mb-2 flex flex-col sm:mb-0 sm:table-row">
 							{#each headers as head}
-								<td class="truncate border border-base-300 p-3 hover:bg-base-300"
+								<td class="truncate border border-base-300 p-3 group-hover:bg-base-300"
 									>{dat[head as keyof typeof dat]}</td
 								>
 							{/each}
-							<td class="flex cursor-pointer space-x-3 border border-base-100 p-3">
-								<button class="btn btn-warning p-3 text-white">
+							<td
+								class="flex cursor-pointer space-x-3 border border-base-100 p-3 group-hover:bg-base-300"
+							>
+								<button class="btn btn-warning p-3">
 									<Icon icon="bi:pen"></Icon>
 								</button>
-								<button class="btn btn-error p-3 text-white" onclick={() => deleteRecord(dat)}>
+								<button class="btn btn-error p-3" onclick={() => deleteRecord(dat)}>
 									<Icon icon="bi:trash"></Icon>
 								</button>
 							</td>
@@ -122,11 +133,14 @@
 					{/each}
 				</tbody>
 			</table>
-			{:else}
+		{:else}
 			<h2>There is no data...</h2>
 		{/if}
 	</div>
 </div>
+{#if !isPaginationDisabled && !isFull}
+	
+
 <div class="flex justify-between px-16">
 	<div class="relative w-56">
 		<button
@@ -189,7 +203,7 @@
 		</button>
 	</div>
 </div>
-
+{/if}
 <style>
 	@media (min-width: 640px) {
 		table {

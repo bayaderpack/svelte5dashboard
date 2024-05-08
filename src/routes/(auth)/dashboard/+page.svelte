@@ -1,7 +1,6 @@
 <script>
 	import { browser } from '$app/environment'
 	import Chart from '$lib/components/Chart.svelte'
-	import TestTable from '$lib/components/TestTable.svelte'
     let chart = $state()
     const [, ...result] = Array(31).keys();
 
@@ -147,7 +146,7 @@ setInterval(updateRandomNumbers, 5000);
     <title>Dashboard page</title>
     <meta name="description" content="Product page with filters" />
 </svelte:head>
-<div class="grid grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 	{#if browser}
 		<div class="card rounded-box shadow-md">
 			<Chart {options} bind:myChart={chart}/>
@@ -198,6 +197,6 @@ setInterval(updateRandomNumbers, 5000);
 		</div>
 	</div>
 </div>
-<TestTable></TestTable>
+
 
 

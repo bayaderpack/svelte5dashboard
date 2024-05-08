@@ -61,7 +61,7 @@
 			'easy-in-out navbar  transition-all duration-300 xl:px-24',
 		)}
 	>
-		<div class="navbar-start">
+		<div class="navbar-start md:hidden">
 			<div class="dropdown">
 				<div tabIndex={0} role="button" class="btn btn-ghost lg:hidden">
 					<svg
@@ -164,7 +164,13 @@
 				</a>
 			{/if}
 		</div>
-		<div class="navbar-center hidden lg:flex">
+		<div
+		class={cn(
+			logo && 'navbar-center',
+			!logo  && 'navbar-start',
+			'hidden lg:flex',
+		)}
+		>
 			<ul class="menu menu-horizontal px-1">
 				<li>
 					<a href="/" class="transition-all duration-300 hover:bg-transparent hover:text-primary">

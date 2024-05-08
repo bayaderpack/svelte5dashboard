@@ -134,7 +134,6 @@
 			let d = new Date(year, month, i + 1)
 			if (i == 0) days.push({ name: monthAbbrev + ' ' + (i + 1), enabled: true, date: d })
 			else days.push({ name: '' + (i + 1), enabled: true, date: d })
-			//console.log('i='+i+'  dt is '+d+' date() is '+d.getDate());
 		}
 		//	show any days to fill up the last row (disabled) - always less than 7
 		for (let i = 0; days.length % 7; i++) {
