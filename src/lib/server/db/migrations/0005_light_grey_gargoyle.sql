@@ -1,1 +1,0 @@
-ALTER TABLE log ADD `user_agent` text;
