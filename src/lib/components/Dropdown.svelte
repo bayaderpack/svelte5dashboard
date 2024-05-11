@@ -1,8 +1,4 @@
 <script>
-	// @ts-nocheck
-
-	import { onMount } from 'svelte'
-
 	/**
 	 * @param {HTMLDetailsElement} node
 	 * @param {{ (): void; (): void; }} callback
@@ -17,7 +13,7 @@
 
 		document.addEventListener('click', handleClick)
 
-		onMount(() => {
+		$effect(() => {
 			return () => {
 				document.removeEventListener('click', handleClick)
 			}

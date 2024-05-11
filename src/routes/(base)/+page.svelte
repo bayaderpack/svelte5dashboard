@@ -1,17 +1,16 @@
 <script>
-	import Card from '$lib/components/Card.svelte'
-	import Hero from '$lib/components/Hero.svelte'
-	import Seo from '$lib/components/Seo.svelte';
+	import Card from '$components/Card.svelte'
+	import Hero from '$components/Hero.svelte'
+	import Seo from '$components/Seo.svelte'
 	// import { onMount } from 'svelte'
 
 	$effect(() => {
-		fetch("http://localhost:8080/api/v1/test-jwt", {
-			mode: "cors",
-			credentials: "include"
-		}) 
+		fetch('http://localhost:8080/api/v1/test-jwt', {
+			mode: 'cors',
+			credentials: 'include',
+		})
 	})
 </script>
-
 
 <Seo title="Bayaderpack" description="You think it we print it"></Seo>
 <!-- <svelte:head>
@@ -25,7 +24,7 @@
 		magnam laboriosam accusantium exercitationem debitis animi doloribus voluptate quibusdam quis
 		cupiditate, commodi iusto veniam in perferendis esse.
 	</p>
-	
+
 	<div class="flex justify-between gap-4">
 		<Card name="mechanicer" />
 		<Card name="firefighter" />
@@ -33,4 +32,3 @@
 		<Card name="cop" />
 	</div>
 </div>
-

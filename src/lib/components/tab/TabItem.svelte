@@ -50,6 +50,7 @@
 	}
 	let buttonClass = $state('')
 	$effect(() => {
+		
 		buttonClass = twMerge(
 			defaultCls,
 			open ? activeClasses ?? ctx.activeClasses : inactiveClasses ?? ctx.inactiveClasses,

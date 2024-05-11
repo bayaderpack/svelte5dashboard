@@ -1,9 +1,8 @@
 <script>
-    import Crud from "$lib/components/Crud.svelte"
-	import SettingsPage from "$lib/components/SettingsPage.svelte"
+	import Crud from '$components/Crud.svelte'
+	import SettingsPage from '$components/SettingsPage.svelte'
 
-
-    let data = $state([
+	let data = $state([
 		{
 			Name: 'Bajro',
 			Email: 'bajro0@gmail.com',
@@ -25,10 +24,8 @@
 			Sex: 'Female',
 		},
 	])
-
 </script>
 
-
 <SettingsPage title="Customers list">
-	<Crud headers={["Name", "Email", "Sex"]} {data} link="/customers/list/add" />
+	<Crud headers={['Name', 'Email', 'Sex']} {data} link="/customers/list/add" />
 </SettingsPage>

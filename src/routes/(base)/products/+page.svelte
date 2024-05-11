@@ -7,10 +7,10 @@
     - @tailwindcss/forms
 -->
 <script>
-	import Filters from '$lib/components/filters/Filters.svelte'
-	import Filter from '$lib/components/filters/Filter.svelte'
+	import Filters from '$components/filters/Filters.svelte'
+	import Filter from '$components/filters/Filter.svelte'
 	import Icon from '@iconify/svelte'
-	import ProductCard from '$lib/components/ProductCard.svelte'
+	import ProductCard from '$components/ProductCard.svelte'
 </script>
 
 <section>
@@ -63,17 +63,18 @@
 			</div>
 
 			<div class="lg:col-span-3">
-				<ul class="grid gap-4 grid-cols-1 lg:grid-cols-3 items-stretch">
+				<ul class="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-3">
 					<li class="h-full">
 						<ProductCard title="Pizza box" price={100} link="/"></ProductCard>
 					</li>
 
 					<li class="h-full">
-						<ProductCard title="Pizza box2"  link="/"></ProductCard>
+						<ProductCard title="Pizza box2" link="/"></ProductCard>
 					</li>
 
 					<li class="h-full">
-						<ProductCard title="Pizza box3" price={3100} link="/" tags={['Plain', 'Gold']}></ProductCard>
+						<ProductCard title="Pizza box3" price={3100} link="/" tags={['Plain', 'Gold']}
+						></ProductCard>
 					</li>
 				</ul>
 			</div>

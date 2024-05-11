@@ -1,27 +1,24 @@
 <script>
-    import Crud from "$lib/components/Crud.svelte"
+	import Crud from '$components/Crud.svelte'
 
-
-    let data = $state([
+	let data = $state([
 		{
-            ID: 1,
+			ID: 1,
 			Name: 'Bajro',
 		},
 		{
-            ID: 2,
+			ID: 2,
 			Name: 'Ajro',
-
 		},
 		{
-            ID: 3,
+			ID: 3,
 			Name: 'Za',
 		},
 		{
-            ID: 4,
+			ID: 4,
 			Name: 'za',
 		},
 	])
-
 </script>
 
-<Crud headers={["ID","Name"]} {data} link="/customers/supliers/add" />
+<Crud headers={['ID', 'Name']} {data} link="/customers/supliers/add" />

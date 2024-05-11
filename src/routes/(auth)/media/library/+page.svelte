@@ -1,8 +1,8 @@
 <script>
-	import FileManager from "$lib/components/FileManager.svelte"
-    import SettingsPage from "$lib/components/SettingsPage.svelte"
-
+	import FileManager from '$components/file/FileManager.svelte'
+	import SettingsPage from '$components/SettingsPage.svelte'
 </script>
+
 <SettingsPage title="Library">
-    <FileManager></FileManager>
+	<FileManager></FileManager>
 </SettingsPage>

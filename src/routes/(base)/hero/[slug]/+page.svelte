@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { sourceLanguageTag } from '$paraglide/runtime'
 	import * as m from '$m'
-	import Seo from '$lib/components/Seo.svelte'
+	import Seo from '$components/Seo.svelte'
 
 	let { data } = $props()
 
@@ -13,6 +13,7 @@
 
 	// let x = y / 0
 </script>
+
 <Seo title="Hero section" description="Details about heros"></Seo>
 
 <h1 style={`view-transition-name: card-title-${data.slug}`}>{cardTitle}</h1>

@@ -1,9 +1,9 @@
 <script>
-	import Map from '$lib/components/Map.svelte'
-	import SettingsPage from '$lib/components/SettingsPage.svelte'
-	import TabItem from '$lib/components/tab/TabItem.svelte'
+	import Map from '$components/Map.svelte'
+	import SettingsPage from '$components/SettingsPage.svelte'
+	import TabItem from '$components/tab/TabItem.svelte'
 
-	import Tabs from '$lib/components/tab/Tabs.svelte'
+	import Tabs from '$components/tab/Tabs.svelte'
 </script>
 
 <SettingsPage title="General Settings">
@@ -12,70 +12,75 @@
 			<div class="flex-cols md:flex-rows flex gap-8">
 				<div class="font-b flex w-full flex-col">
 					<h3>Store info</h3>
-          <label class="form-control w-full">
+					<label class="form-control w-full">
 						<div class="label">
 							<span class="label-text">Store Name</span>
 						</div>
 						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
 					</label>
-          <label class="form-control w-full">
+					<label class="form-control w-full">
 						<div class="label">
 							<span class="label-text">Stire Description</span>
 						</div>
-						<textarea rows="3" class="textarea textarea-bordered w-full" >We are printing and packaging company for small and medium businesses
-            </textarea>
+						<textarea rows="3" class="textarea textarea-bordered w-full"
+							>We are printing and packaging company for small and medium businesses
+						</textarea>
 					</label>
-          <label class="form-control w-full">
+					<label class="form-control w-full">
 						<div class="label">
 							<span class="label-text">Country</span>
 						</div>
 						<input type="text" placeholder="966501231231" class="input input-bordered w-full" />
 					</label>
-          <label class="form-control w-full">
-          <div class="label">
-            <span class="label-text">City</span>
-          </div>
-          <input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
-        </label>
-        <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Postal Code</span>
-        </div>
-        <input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
-      </label>
-              <label class="form-control w-full">
-        <div class="label">
-        <span class="label-text">Address</span>
-      </div>
-      <input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
-    </label>
-            <label class="form-control w-full">
-        <div class="label">
-      <span class="label-text">Telephone</span>
-    </div>
-    <input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
-  </label>
-          <label class="form-control w-full">
-        <div class="label">
-    <span class="label-text">VAT. Number</span>
-  </div>
-  <input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
-</label>
-        <label class="form-control w-full">
-        <div class="label">
-  <span class="label-text">Opening hours</span>
-</div>
-<input type="text" placeholder="Sa 09:00-16:00, Su-Th 08:00-18:00" class="input input-bordered w-full" />
-</label>
-        <label class="form-control w-full">
-        <div class="label">
-  <span class="label-text">Website</span>
-</div>
-<input type="text" placeholder="bayaderpack.com" class="input input-bordered w-full" />
-</label>
-<div class="h-96 mt-8">
-					<Map />
-        </div>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">City</span>
+						</div>
+						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Postal Code</span>
+						</div>
+						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Address</span>
+						</div>
+						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Telephone</span>
+						</div>
+						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">VAT. Number</span>
+						</div>
+						<input type="text" placeholder="Bayaderpack" class="input input-bordered w-full" />
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Opening hours</span>
+						</div>
+						<input
+							type="text"
+							placeholder="Sa 09:00-16:00, Su-Th 08:00-18:00"
+							class="input input-bordered w-full"
+						/>
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Website</span>
+						</div>
+						<input type="text" placeholder="bayaderpack.com" class="input input-bordered w-full" />
+					</label>
+					<div class="mt-8 h-96">
+						<Map />
+					</div>
 				</div>
 				<div class="flex w-full flex-col">
 					<h3 class="font-bold">Social media</h3>

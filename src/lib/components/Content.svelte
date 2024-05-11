@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Effect from './Effect.svelte'
+	import Effect from '$components/Effect.svelte'
 
 	interface MyProps {
 		title: string

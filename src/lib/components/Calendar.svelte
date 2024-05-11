@@ -1,6 +1,6 @@
 <script lang="ts">
 	import dayjs from 'dayjs'
-	import DateInput from './DateInput.svelte'
+	import DateInput from '$components/inputs/DateInput.svelte'
 
 
 	var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']

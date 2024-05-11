@@ -1,7 +1,6 @@
 <script>
-	import SettingsPage from "$lib/components/SettingsPage.svelte"
-	import Task from "$lib/components/Task.svelte"
-
+	import SettingsPage from '$components/SettingsPage.svelte'
+	import Task from '$components/Task.svelte'
 </script>
 
 <SettingsPage title="Tasks">

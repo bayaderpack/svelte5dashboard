@@ -1,9 +1,7 @@
 <script>
-	import Calendar from "$lib/components/Calendar.svelte"
-	import SettingsPage from "$lib/components/SettingsPage.svelte"
-
+	import Calendar from '$components/Calendar.svelte'
+	import SettingsPage from '$components/SettingsPage.svelte'
 </script>
-
 
 <SettingsPage title="Appointments">
 	<Calendar></Calendar>

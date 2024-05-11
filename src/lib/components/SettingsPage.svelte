@@ -1,13 +1,19 @@
 <script lang="ts">
 	interface MyProps {
 		title: string
+		addButtonText?: string
+		addButtonLink?: string
 		children: any
 	}
-	let { children, title }: MyProps = $props()
+	let { children, title, addButtonLink, addButtonText }: MyProps = $props()
 </script>
 
-<h2 class="mb-6 text-3xl uppercase">{title}</h2>
-
+<div class="flex justify-between">
+	<h2 class="mb-6 text-3xl uppercase">{title}</h2>
+	{#if addButtonLink && addButtonText}
+		<a href={addButtonLink} class="btn btn-primary">{addButtonText}</a>
+	{/if}
+</div>
 <div class="rounded-box bg-base-200 p-3 md:p-8">
 	{@render children?.()}
 </div>

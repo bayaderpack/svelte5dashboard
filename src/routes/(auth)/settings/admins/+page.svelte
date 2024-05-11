@@ -1,6 +1,6 @@
 <script>
-	import SettingsPage from '$lib/components/SettingsPage.svelte'
-	import Toggle from '$lib/components/Toggle.svelte'
+	import SettingsPage from '$components/SettingsPage.svelte'
+	import Toggle from '$components/Toggle.svelte'
 	import Icon from '@iconify/svelte'
 	import Swal from 'sweetalert2'
 

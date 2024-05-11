@@ -1,7 +1,7 @@
 <script>
 	import Icon from '@iconify/svelte'
 
-	import countries from '$lib/components/country'
+	import countries from '$components/inputs/country'
 
 	let selected = countries[0]
 	let open = false

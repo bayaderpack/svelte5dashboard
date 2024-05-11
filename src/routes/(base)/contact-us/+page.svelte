@@ -1,7 +1,7 @@
 <script>
 	import Icon from '@iconify/svelte'
-	import PhoneInput from '$lib/components/PhoneInput.svelte'
-	import Content from '$lib/components/Content.svelte'
+	import PhoneInput from '$components/inputs/PhoneInput.svelte'
+	import Content from '$components/Content.svelte'
 </script>
 
 <Content title="Contact us">
@@ -66,11 +66,11 @@
 					class="md:mt-4"
 				></iframe>
 
-				<div class="stat border rounded-box">
-					<div class="stat-title flex items-center text-base-content mb-6 text-xl font-black">
+				<div class="stat rounded-box border">
+					<div class="stat-title mb-6 flex items-center text-xl font-black text-base-content">
 						Social networks
 					</div>
-					<div class="stat-value grid grid-cols-2 md:grid-cols-4 text-2xl gap-7">
+					<div class="stat-value grid grid-cols-2 gap-7 text-2xl md:grid-cols-4">
 						<Icon icon="logos:facebook" class="mr-4 text-center text-6xl" />
 						<Icon icon="logos:whatsapp-icon" class="mr-4 text-center text-6xl" />
 						<Icon icon="logos:twitter" class="mr-4 text-center text-6xl" />

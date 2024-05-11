@@ -6,7 +6,7 @@
 	import { page } from '$app/stores'
 	import * as m from '$paraglide/messages'
 	import { cn } from '$lib/utils'
-	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
+	import ThemeToggleIcon from '$components/ThemeToggleIcon.svelte'
 
 	let { logo = false } = $props()
 

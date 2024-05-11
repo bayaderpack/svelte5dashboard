@@ -7,17 +7,13 @@
 	import { onNavigate } from '$app/navigation'
 	import type { Snippet } from 'svelte'
 
-	
-
-	import Header from '$lib/components/Header.svelte'
-	import Footer from '$lib/components/Footer.svelte'
+	import Header from '$components/Header.svelte'
+	import Footer from '$components/Footer.svelte'
 
 	type Props = {
 		children: Snippet
 	}
 	const { children }: Props = $props()
-
-	
 
 	onNavigate((navigation) => {
 		if (document.startViewTransition && navigation.from?.url.href !== navigation.to?.url.href) {
@@ -43,10 +39,8 @@
 	})
 </script>
 
-
-
 <ParaglideJS {i18n}>
-	<Header  logo={true}/>
+	<Header logo={true} />
 	<main class="w-full">
 		{@render children()}
 	</main>

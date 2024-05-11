@@ -1,7 +1,5 @@
 <script>
-	import SettingsPage from "$lib/components/SettingsPage.svelte"
-
+	import SettingsPage from '$components/SettingsPage.svelte'
 </script>
-<SettingsPage title="Whatsapp Bot">
-    test
-</SettingsPage>
+
+<SettingsPage title="Whatsapp Bot">test</SettingsPage>
