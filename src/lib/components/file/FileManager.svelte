@@ -49,6 +49,7 @@
 		}
 		getNewData()
 	}
+	let selectedFiles = $state([])
 </script>
 
 <div class="min-h-[500px] w-full border-base-300">
@@ -88,21 +89,34 @@
 		{#if newData && newData.length > 0}
 			<div class="grid grid-cols-6 gap-4">
 				<!-- Trick to fetch only on the client side -->
-
+				{JSON.stringify(selectedFiles)}
 				{#each newData as file}
-					<FileCard
-						name={file.name}
-						isFolder={file.isFolder}
-						type={file.type}
-						path={'http://localhost:8080/assets/european_honey/' + selected + file.name}
-						isChecked={isAllSelected}
-						onclick={() => {
-							if (file.isFolder) {
-								selected += file.name + '/'
-								getNewData()
-							}
-						}}
-					></FileCard>
+					<div class="relative">
+						<FileCard
+							name={file.name}
+							isFolder={file.isFolder}
+							type={file.type}
+							path={'http://localhost:8080/assets/european_honey/' + selected + file.name}
+							onclick={() => {
+								if (file.isFolder) {
+									selected += file.name + '/'
+									getNewData()
+								}
+							}}
+						></FileCard>
+						<div class="form-control absolute right-1 top-1">
+							<label class="label cursor-pointer">
+								<input
+									type="checkbox"
+									checked={isAllSelected ? true : false}
+									onclick={() => {
+										if (!file.isFolder) selectedFiles.push((selected + file.name))
+									}}
+									class="checkbox-primary checkbox"
+								/>
+							</label>
+						</div>
+					</div>
 				{/each}
 			</div>
 		{:else}

@@ -8,23 +8,14 @@
 		isFolder: boolean
 		onclick?: (e: any) => void
 		path: string
-		isChecked?: boolean
+
 	}
-	let { name, type, isFolder, path, onclick, isChecked }: MyProps = $props()
+	let { name, type, isFolder, path, onclick }: MyProps = $props()
 	// $inspect(path)
 </script>
 
-<div class="card" {onclick} tabindex="-1" role="button" onkeydown={onclick}>
+<div class="card border border-base-300" {onclick} tabindex="-1" role="button" onkeydown={onclick}>
 	<figure class="relative min-h-56 w-full">
-		<div class="form-control absolute right-1 top-1">
-			<label class="label cursor-pointer">
-				<input
-					type="checkbox"
-					checked={isChecked ? true : false}
-					class="checkbox-primary checkbox"
-				/>
-			</label>
-		</div>
 		<div class="flex w-full flex-col items-center">
 			{#if isFolder}
 				<Icon icon="bi:folder" class="text-6xl"></Icon>
