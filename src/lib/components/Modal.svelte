@@ -28,5 +28,5 @@
 	onclose={() => (open = false)}
 >
 	{@render children?.()}
-	<button onclick={() => (open = false)}>Close</button>
+	<button onclick={() => (open = false)} class="btn btn-ghost float-right">Close</button>
 </dialog>

@@ -3,7 +3,9 @@
 	import FileCard from '$components/file/FileCard.svelte'
 	import { browser } from '$app/environment'
 	import Lottie from '$components/Lottie.svelte'
-
+	import { Set as Sett } from 'svelte/reactivity'
+	import Modal from '$components/Modal.svelte'
+	import Swal from 'sweetalert2'
 	let selected = $state('')
 
 	interface DataType {
@@ -49,7 +51,62 @@
 		}
 		getNewData()
 	}
-	let selectedFiles = $state([])
+	let selectedFiles = new Sett()
+
+	const addElement = (el: string) => {
+		console.log(el)
+
+		if (selectedFiles.has(el)) {
+			selectedFiles.delete(el)
+		} else {
+			selectedFiles.add(el)
+		}
+	}
+	let modalOpen = $state(false)
+	let folderName = $state()
+
+	const createFolder = async () => {
+		if (folderName && folderName != '') {
+			const pathic = 'http://localhost:8080/api/v1/media/create?path=' + selected + folderName
+			const res = await fetch(pathic)
+			if (res.ok) {
+				Swal.fire({
+					icon: 'success',
+					title: 'Folder is created 😀',
+					showConfirmButton: false,
+					timer: 2500,
+				})
+				modalOpen = false
+				folderName = ''
+				getNewData()
+			} else {
+				const data1 = await res.json()
+				console.log(data1)
+				Swal.fire({
+					icon: 'error',
+					title: 'Folder cant be created 😥',
+					html: `
+					<h2 class="text-2xl font-black">Error is:  ${data1}</h2>
+					`,
+					showConfirmButton: false,
+					timer: 2500,
+				})
+				modalOpen = false
+				folderName = ''
+			}
+		}
+	}
+
+	let renameFolderNameOld = $state()
+	let renameFolderNameNew = $state()
+	const renameFolder = () => {
+		if (renameFolderNameNew && renameFolderNameNew != '') {
+		}
+	}
+	const filecontext = (e: MouseEvent, file: DataType) => {
+		e.preventDefault()
+		const div = document.createElement('div')
+	}
 </script>
 
 <div class="min-h-[500px] w-full border-base-300">
@@ -63,6 +120,33 @@
 			>
 				<Icon icon="icon-park-outline:return" class="text-3xl"></Icon>
 			</button>
+		</div>
+		<div class="w-full lg:tooltip" data-tip="Create new folder">
+			<button
+				class="btn btn-ghost w-full"
+				onclick={() => {
+					modalOpen = !modalOpen
+				}}><Icon icon="material-symbols:create-new-folder-rounded" class="text-3xl"></Icon></button
+			>
+
+			<Modal open={modalOpen}>
+				<div class="flex flex-col items-center space-y-5">
+					<label class="form-control w-full max-w-xs">
+						<div class="label">
+							<span class="label-text">Folder name</span>
+						</div>
+						<input
+							type="text"
+							bind:value={folderName}
+							placeholder="Folder name"
+							class="input input-bordered w-full max-w-xs"
+						/>
+					</label>
+					<button onclick={() => createFolder()} class="btn btn-success btn-block max-w-xs"
+						>Create folder</button
+					>
+				</div>
+			</Modal>
 		</div>
 		<button
 			class="btn btn-ghost"
@@ -89,9 +173,9 @@
 		{#if newData && newData.length > 0}
 			<div class="grid grid-cols-6 gap-4">
 				<!-- Trick to fetch only on the client side -->
-				{JSON.stringify(selectedFiles)}
+				{JSON.stringify(Array.from(selectedFiles))}
 				{#each newData as file}
-					<div class="relative">
+					<div class="relative" oncontextmenu={(e) => filecontext(e, file)} role="dialog">
 						<FileCard
 							name={file.name}
 							isFolder={file.isFolder}
@@ -110,7 +194,7 @@
 									type="checkbox"
 									checked={isAllSelected ? true : false}
 									onclick={() => {
-										if (!file.isFolder) selectedFiles.push((selected + file.name))
+										addElement(selected + file.name)
 									}}
 									class="checkbox-primary checkbox"
 								/>

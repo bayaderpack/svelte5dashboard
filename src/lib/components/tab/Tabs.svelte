@@ -35,7 +35,7 @@
 		...attributes
 	}: Props = $props()
 
-	let defaultCls: string = twMerge('flex flex-wrap space-x-2 rtl:space-x-reverse', defaultClass)
+	let defaultCls: string = twMerge('flex space-x-2', defaultClass)
 	let contentCls: string = twMerge('p-4 bg-base-200 rounded-box ', contentClass)
 	let activeCls: string = twMerge(
 		'p-4 text-primary-600 bg-base-100 rounded-t-lg text-base-content',
