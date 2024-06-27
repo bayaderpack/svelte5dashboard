@@ -2,10 +2,9 @@
 	"window.zoomLevel": 1,
 	"workbench.startupEditor": "none",
 	"workbench.editor.labelFormat": "short",
-	"workbench.colorTheme": "Developers Theme - Slack Dark",
+	"workbench.colorTheme": "Default Dark Modern",
 	"workbench.iconTheme": "city-lights-icons-vsc",
-	"workbench.productIconTheme": "developer-icons",
-	"workbench.activityBar.orientation": "vertical" /*cursor ide*/,
+	"workbench.productIconTheme": "Default",
 	"workbench.colorCustomizations": {
 		"focusBorder": "#252525",
 		"titleBar.activeBackground": "#1a1a1a",
@@ -56,13 +55,12 @@
 	"editor.fontFamily": "'FiraCode Nerd Font', monospace",
 	"editor.fontSize": 14,
 	"editor.formatOnSave": true,
-	"editor.minimap.enabled": false,
 	"editor.linkedEditing": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
-	"explorer.compactFolders": false,
+	"explorer.compactFolders": true,
 	"breadcrumbs.enabled": false,
 	"prettier.configPath": ".prettierrc",
 	"scss.lint.unknownAtRules": "ignore",

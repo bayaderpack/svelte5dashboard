@@ -79,6 +79,6 @@
 
 <style lang="postcss">
 	.active {
-		@apply bg-base-200;
+		@apply bg-base-300;
 	}
 </style>

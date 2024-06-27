@@ -71,10 +71,20 @@
 						Social networks
 					</div>
 					<div class="stat-value grid grid-cols-2 gap-7 text-2xl md:grid-cols-4">
-						<Icon icon="logos:facebook" class="mr-4 text-center text-6xl" />
-						<Icon icon="logos:whatsapp-icon" class="mr-4 text-center text-6xl" />
-						<Icon icon="logos:twitter" class="mr-4 text-center text-6xl" />
-						<Icon icon="skill-icons:instagram" class="mr-4 text-center text-6xl" />
+						<a href="/" class="btn btn-ghost btn-lg flex h-32 items-center justify-center">
+							<Icon icon="logos:facebook" class="text-center text-6xl" />
+						</a>
+						<a href="/" class="btn btn-ghost btn-lg flex h-32 items-center justify-center">
+							<Icon icon="logos:whatsapp-icon" class="text-center text-6xl" />
+						</a>
+
+						<a href="/" class="btn btn-ghost btn-lg flex h-32 items-center justify-center">
+							<Icon icon="logos:twitter" class="text-center text-6xl" />
+						</a>
+
+						<a href="/" class="btn btn-ghost btn-lg flex h-32 items-center justify-center">
+							<Icon icon="skill-icons:instagram" class="text-center text-6xl" />
+						</a>
 					</div>
 				</div>
 			</div>

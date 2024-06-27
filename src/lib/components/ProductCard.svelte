@@ -9,7 +9,7 @@
     const { image, title, link, price, tags}: MyProps = $props()
     let placeholder = "https://bayaderpack.com/_next/image?url=https%3A%2F%2Fadmin.bayaderpack.com%2Fmedia%2Fproducts%2Fbags%2Finvercote-bag%2Fwrap_paper_large.jpg&w=384&q=75"
 </script>
-<a href={link} class="h-full">
+
 <div class="card h-full bg-base-100 border hover:[&>figure>img]:scale-110 transition-all duration-300">
     <figure class="border-b"><img class="transition-all duration-300" src={image || placeholder} alt="White pack" /></figure>
     <div class="card-body bg-base-200 rounded-b-box justify-between">
@@ -33,4 +33,3 @@
       </div>
     </div>
   </div>
-</a>

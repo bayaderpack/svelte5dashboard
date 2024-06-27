@@ -17,17 +17,17 @@
 	let newData = $state<DataType[]>([])
 	const getNewData = async () => {
 		if (selected != '/' && selected != '' && selected) {
-			const pathic = 'http://localhost:8080/api/v1/media?path=' + selected
+			const pathic = 'http://localhost:8080/api/media/?path=' + selected
 
 			const res = await fetch(pathic)
 			const data1 = await res.json()
 
-			newData = data1.message.children ?? []
+			newData = data1.data.children ?? []
 		} else {
-			const pathic = 'http://localhost:8080/api/v1/media'
+			const pathic = 'http://localhost:8080/api/media/'
 			const res = await fetch(pathic)
 			const data1 = await res.json()
-			newData = data1.message.children ?? []
+			newData = data1.data.children ?? []
 		}
 	}
 
@@ -67,7 +67,7 @@
 
 	const createFolder = async () => {
 		if (folderName && folderName != '') {
-			const pathic = 'http://localhost:8080/api/v1/media/create?path=' + selected + folderName
+			const pathic = 'http://localhost:8080/api/media/create?path=' + selected + folderName
 			const res = await fetch(pathic)
 			if (res.ok) {
 				Swal.fire({
@@ -106,6 +106,19 @@
 	const filecontext = (e: MouseEvent, file: DataType) => {
 		e.preventDefault()
 		const div = document.createElement('div')
+
+		div.classList.add(
+			'rounded-box',
+			'bg-base-200',
+			'border',
+			'px-8',
+			'flex',
+			'flex-col',
+			'space-y-4',
+		)
+
+		
+		// div.appendChild()
 	}
 </script>
 
@@ -180,7 +193,7 @@
 							name={file.name}
 							isFolder={file.isFolder}
 							type={file.type}
-							path={'http://localhost:8080/assets/european_honey/' + selected + file.name}
+							path={'http://localhost:8080/static/' + selected + file.name}
 							onclick={() => {
 								if (file.isFolder) {
 									selected += file.name + '/'

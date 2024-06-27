@@ -38,20 +38,20 @@
 	let defaultCls: string = twMerge('flex space-x-2', defaultClass)
 	let contentCls: string = twMerge('p-4 bg-base-200 rounded-box ', contentClass)
 	let activeCls: string = twMerge(
-		'p-4 text-primary-600 bg-base-100 rounded-t-lg text-base-content',
+		'p-4 text-primary-600 bg-primary rounded-t-lg text-base-content',
 		activeClasses,
 	)
 	let inactiveCls: string = twMerge(
-		'p-4 rounded-t-lg bg-base-100 text-base-content',
+		'p-4 rounded-t-lg bg-primary text-base-content',
 		inactiveClasses,
 	)
 
 	// styles
 	const styledActiveClasses = {
 		full: 'p-4 w-full group-first:rounded-s-lg group-last:rounded-e-lg text-base-content bg-base-100 focus:ring-4 focus:ring-primary-300 focus:outline-none',
-		pill: 'py-3 px-4 text-base-content bg-primary-600 rounded-lg',
+		pill: 'py-3 px-4 text-base-content bg-primary rounded-lg',
 		underline:
-			'p-4 text-base-content border-b-2 border-primary-600  dark:border-primary-500',
+			'p-4 text-base-content border-b-2 border-primary',
 		none: '',
 	}
 

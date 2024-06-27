@@ -16,6 +16,10 @@ declare global {
 		viewTransitionName?: string
 	}
 
+	interface Array<T> {
+		removeByValue(elem: T): Array<T>
+	}
+
 	interface Window {
 		toggleTheme?(): void,
 		ApexCharts: ApexCharts,

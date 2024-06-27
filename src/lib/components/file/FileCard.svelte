@@ -8,10 +8,8 @@
 		isFolder: boolean
 		onclick?: (e: any) => void
 		path: string
-
 	}
 	let { name, type, isFolder, path, onclick }: MyProps = $props()
-	// $inspect(path)
 </script>
 
 <div class="card border border-base-300" {onclick} tabindex="-1" role="button" onkeydown={onclick}>
