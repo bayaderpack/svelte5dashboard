@@ -117,13 +117,12 @@
 			'space-y-4',
 		)
 
-		
 		// div.appendChild()
 	}
 </script>
 
 <div class="min-h-[500px] w-full border-base-300">
-	<div class="grid grid-cols-4">
+	<div class="grid grid-cols-5">
 		<div class="w-full lg:tooltip" data-tip="Go back">
 			<button
 				class="btn btn-ghost w-full"
@@ -169,6 +168,16 @@
 		>
 			Select all
 		</button>
+		<button
+			class="btn btn-ghost"
+			onclick={() => {
+				console.log(selected)
+
+				// isAllSelected = !isAllSelected
+			}}
+		>
+			Download
+		</button>
 		<div class="w-full lg:tooltip" data-tip="Delete">
 			<button
 				class="btn btn-error w-full"
@@ -212,6 +221,39 @@
 									class="checkbox-primary checkbox"
 								/>
 							</label>
+						</div>
+						<div class="absolute bottom-1 right-1 cursor-pointer">
+							<Icon
+								icon="mingcute:download-3-fill"
+								class="text-5xl"
+								onclick={() => {
+									fetch(
+										'http://localhost:8080/api/media/download?files=' +
+										selected + file.name,
+									)
+										.then((raw) => {
+											// console.log(raw)
+											return raw.blob()
+										})
+										.then((data) => {
+											// console.log(data)
+											const imageBase64 = URL.createObjectURL(data)
+											const a = document.createElement('a')
+											a.style.setProperty('display', 'none')
+											document.body.appendChild(a)
+											a.download =
+												`http://localhost:8080/api/media/download?files=${selected + file.name}`.replace(
+													/^.*[\\\/]/,
+													'',
+												)
+											a.href = imageBase64
+											a.click()
+											a.remove()
+											// var file = window.URL.createObjectURL(data)
+											// window.location.assign(file)
+										})
+								}}
+							></Icon>
 						</div>
 					</div>
 				{/each}

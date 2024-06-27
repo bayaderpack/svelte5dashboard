@@ -49,14 +49,16 @@
 		return { destroy }
 	}
 	let buttonClass = $state('')
+$inspect(ctx.activeClasses)
 	$effect(() => {
 		
 		buttonClass = twMerge(
 			defaultCls,
-			open ? activeClasses ?? ctx.activeClasses : inactiveClasses ?? ctx.inactiveClasses,
-			open && 'active',
+			open ? twMerge(ctx.activeClasses,activeClasses ): twMerge(ctx.inactiveClasses,inactiveClasses ),
+			// open && twMerge(ctx.activeClasses,activeClasses ) ,
 		)
 	})
+	// console.log(activeClasses)
 </script>
 
 <li class={twMerge('group', className)} role="presentation">
@@ -77,8 +79,4 @@
 	{/if}
 </li>
 
-<style lang="postcss">
-	.active {
-		@apply bg-base-300;
-	}
-</style>
+
