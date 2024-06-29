@@ -14,6 +14,6 @@
 		<a href={addButtonLink} class="btn btn-primary">{addButtonText}</a>
 	{/if}
 </div>
-<div class="rounded-box bg-base-200 p-3 md:p-8">
+<div class="rounded-box p-3 md:p-5">
 	{@render children?.()}
 </div>

@@ -30,7 +30,7 @@
 	}: Props = $props()
 
 	let defaultCls: string = twMerge(
-		'inline-block text-sm font-medium text-center disabled:cursor-not-allowed',
+		'btn btn-square w-full h-full',
 		defaultClass,
 	)
 
@@ -49,7 +49,7 @@
 		return { destroy }
 	}
 	let buttonClass = $state('')
-$inspect(ctx.activeClasses)
+// $inspect(ctx.activeClasses)
 	$effect(() => {
 		
 		buttonClass = twMerge(
