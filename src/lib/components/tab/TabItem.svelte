@@ -30,7 +30,7 @@
 	}: Props = $props()
 
 	let defaultCls: string = twMerge(
-		'btn btn-square w-full h-full',
+		'btn  w-full h-full',
 		defaultClass,
 	)
 
@@ -61,7 +61,7 @@
 	// console.log(activeClasses)
 </script>
 
-<li class={twMerge('group', className)} role="presentation">
+<li class={twMerge('group w-full', className)} role="presentation">
 	<button type="button" onclick={() => (open = true)} role="tab" {disabled} class={buttonClass}>
 		{#if titleSlot}
 			{@render titleSlot()}

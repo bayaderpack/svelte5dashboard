@@ -6,14 +6,15 @@
 	// const { title }: MyProps = $props()
 	interface MyProps {
 		children: any
-		title: string
+		title: string,
+		open?: boolean
 	}
-	let { children, title }: MyProps = $props()
+	let { children, title, open=true }: MyProps = $props()
 </script>
 
 <div>
 	<details
-		open
+		bind:open={open}
 		class="group overflow-hidden rounded-box border border-base-300 [&_summary::-webkit-details-marker]:hidden"
 	>
 		<summary

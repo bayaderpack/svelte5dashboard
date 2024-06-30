@@ -1,12 +1,24 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte'
 	import UserSelectCheckbox from './UserSelectCheckbox.svelte'
+	import { currentSelected } from './selectedUsers.svelte'
 	// let options = $state([])
 	let open = $state(false)
 	let filter = $state('')
-	let { show=false } = $props()
+
+	interface Props {
+		show?: boolean,
+		checked?: Array<any> ,
+			selectedValues?: Array<any> ,
+	}
+	let { show=false, checked=[], selectedValues=$bindable() }: Props = $props()
 	const options = ['Boss Manager', 'umair aziz', 'ahmed eldeeb', 'Ahmed Al-Ahywi', 'hazem ziady']
-	let selected = $state(options.map(() => false))
+	let selected = $state(options.map((option) => checked.includes(option) ? true : false))
+// $inspect(options.filter((o, i) => selected[i]))
+$effect(() => {
+	currentSelected.set(options.filter((o, i) => selected[i]))
+	// new CustomEvent("ccc", new Cust options.filter((o, i) => selected[i]))
+})
 </script>
 
 <div class="relative w-full">
@@ -18,7 +30,7 @@
 	{/if}
 
 	{#if open || show}
-		<div class:w-56={!show} class:w-full={show}  class="z-50 absolute mt-3 flex  flex-col gap-3 rounded-lg bg-white p-3 shadow-lg">
+		<div class:w-56={!show} class:w-full={show} class:absolute={!show} class:relative={show} class:shadow-lg={!show}    class="z-50 border mt-3 flex  flex-col gap-3 rounded-box bg-base-100 p-3 ">
 			<input
 				bind:value={filter}
 				placeholder="filter"
@@ -28,7 +40,7 @@
 
 			{#each options as opt, index}
 				{#if opt.toLowerCase().includes(filter.toLowerCase())}
-					<UserSelectCheckbox value={opt} bind:checked={selected[index]}></UserSelectCheckbox>
+					<UserSelectCheckbox value={opt} bind:checked={selected[index]} ></UserSelectCheckbox>
 				{/if}
 			{/each}
 		</div>

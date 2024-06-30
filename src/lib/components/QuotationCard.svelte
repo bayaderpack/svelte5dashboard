@@ -1,23 +1,32 @@
-<script>
+<script lang="ts">
 	import Icon from '@iconify/svelte'
 	import UserSelect from './UserSelect.svelte'
+
+	interface Props {
+		id: string,
+		customer: string, 
+		since: string, 
+		mobile: string,
+		designers: Array<any>
+	}
+	let { id, customer, since, mobile, designers}: Props = $props()
 </script>
 
 <div class="card flex w-full flex-col space-y-2 border-primary border-2 bg-base-100 p-6">
-	<h2>#Q2406241680</h2>
+	<h2>{id}</h2>
 	<div class="divider"></div>
 	<div class="flex justify-between">
-		<p class="text-sm"><span class="font-bold">Customer:</span>ناصر علي السعد (بطاطس ابو علي)</p>
-		<p class="text-sm"><span class="font-bold">Since:</span>24 June 2024 - 09:32 AM</p>
+		<p class="text-sm"><span class="font-bold">Customer:</span>{customer}</p>
+		<p class="text-sm"><span class="font-bold">Since:</span>{since}</p>
 	</div>
-	<p class="text-sm"><span class="font-bold">Mobile:</span>966-502933052</p>
+	<p class="text-sm"><span class="font-bold">Mobile:</span>{mobile}</p>
 	<div class="flex items-center space-x-2">
 		<h3 class="font-bold">Desigers:</h3>
-		<div class="badge badge-primary badge-lg p-4">Boss(You)</div>
-		<div class="badge badge-lg p-4">ahmed</div>
-		<div class="badge badge-lg p-4">umair</div>
+		{#each designers as designer}
+		<div class="badge badge-lg p-6 text-sm" class:badge-primary={designer == "Boss(You)"}>{designer}</div>
+		{/each}
 
-        <UserSelect></UserSelect>
+        <UserSelect checked={designers}></UserSelect>
 	</div>
     <div class="divider"></div>
 	<ul class="timeline timeline-compact w-full">

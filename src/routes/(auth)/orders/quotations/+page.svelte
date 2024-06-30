@@ -7,87 +7,97 @@
 	import Filter from '$components/filters/Filter.svelte'
 	import Icon from '@iconify/svelte'
 	import UserSelect from '$components/UserSelect.svelte'
+	import { currentSelected } from '$components/selectedUsers.svelte'
 
 	let data = [
 		{
 			id: '#Q2406091660',
-			category: 'nekretnine',
-			price: 12,
-			tip: 'Potražnja',
-			location: 'Ilidza, Sarajevo',
-			image:
-				'https://cf.bstatic.com/xdata/images/hotel/max1024x768/486885944.jpg?k=9e0bf27d355e88458f5593448bf17aacb959566926a4b43973d7483a60179c00&o=&hp=1',
+			customer: 'ناصر علي السعد (بطاطس ابو علي)',
+			mobile: '966-502933052',
+			since: '24 June 2024',
+			designers: ['Boss Manager', 'umair aziz'],
 		},
 		{
 			id: '#Q2406091663',
-			category: 'automobili',
-			price: 423,
-			tip: 'Prodaja',
-			location: 'Tomislavgrad',
-			image: 'https://image.stern.de/33171308/t/st/v3/w1440/r1.7778/-/bmw-i4.jpg',
+			customer: 'ناصر علي السعد (بطاطس ابو علي)',
+			mobile: '966-502931231',
+			since: '24 June 2024',
+			designers: ['Boss Manager', 'hazem ziady'],
 		},
 		{
 			id: '#Q2406091665',
-			category: 'nekretnine',
-			price: 248,
-			tip: 'Iznajmljivanje',
-			location: 'Ilijas, Sarajevo',
-			image: 'https://media-cdn.tripadvisor.com/media/photo-s/01/aa/65/94/vor-dem-restaurant.jpg',
+			customer: 'ناصر علي اشسا (بطاطس ابو علي)',
+			mobile: '966-502931521',
+			since: '24 June 2024',
+			designers: ['Boss Manager', 'Ahmed Al-Ahywi', 'hazem ziady'],
 		},
 		{
 			id: '#Q2406091668',
-			category: 'mobiteli',
-			price: 169,
-			tip: 'Prodaja',
-			location: 'Ilijas, Sarajevo',
-			image:
-				'https://tehnomag.com/upload/catalog/product/4855/wwen-iphone14promax-q422-space-black-pdp-images-po_63d92f4acc0d3.jpg',
+			customer: 'ناصر علي مشسب (بطاطس ابو علي)',
+			mobile: '966-502933542',
+			since: '24 June 2024',
+			designers: ['ahmed eldeeb', 'Ahmed Al-Ahywi', 'hazem ziady'],
 		},
 		{
 			id: '#Q2406091643',
-			category: 'nekretnine',
-			price: 130,
-			tip: 'Prodaja',
-			location: 'Tuzla',
-			image: 'https://www.njuskalo.hr/image-w920x690/nekretnine/kuca-tuzla-slika-213205794.jpg',
+			customer: 'ناصر علي حشسب (بطاطس ابو علي)',
+			mobile: '966-502932521',
+			since: '24 June 2024',
+			designers: ['ahmed eldeeb', 'Ahmed Al-Ahywi', 'hazem ziady'],
 		},
 		{
 			id: '#Q2406091629',
-			category: 'automobili',
-			price: 120,
-			tip: 'Iznajmljivanje',
-			location: 'Mostar',
-			image:
-				'https://carwow-de-wp-3.imgix.net/bmw-i7m-final-image-graded-grille-lights-1-1.png?auto=format&cs=tinysrgb&fit=crop&h=800&ixlib=rb-1.1.0&q=60&w=1600',
+			customer: 'ناصر علي هعصثض (بطاطس ابو علي)',
+			mobile: '966-502936614',
+			since: '24 June 2024',
+			designers: ['ahmed eldeeb', 'Ahmed Al-Ahywi', 'hazem ziady'],
 		},
 	]
 
-	const uniqueCategories = [...new Set(data.map((item) => item.category))]
-	const uniqueType = [...new Set(data.map((item) => item.tip))]
-	const uniqueLocations = [...new Set(data.map((item) => item.location))]
+	const uniqueCustomers = [...new Set(data.map((item) => item.customer))]
+	// const uniqueLocations = [...new Set(data.map((item) => item.location))]
 
-	let filterCategory: Array<string> = $state([])
-	let filterType: Array<string> = $state([])
+	let filterCustomer: Array<string> = $state([])
+	let filterDesigners: Array<string> = $state([])
 	let filterLocation: Array<string> = $state([])
 	let quoted = $state()
 	// let cards = $derived(data.filter(dat => dat.match(regexQuery)))
 
 	// $inspect($currentMax)
-
+	let selectedValues: Array<any> | undefined = $state()
+	currentSelected.subscribe((value) => {
+		selectedValues = value
+	})
+	let searchValue = $state('')
 	// $inspect(getContext("currentMax"))
 	let cards: any[] = $derived.by(() => {
 		// Validate input (optional, but recommended)
 
 		// Filter the data based on price range
 		return data.filter((item) => {
-			const price = item.price
 			return (
-				(filterCategory.length === 0 || filterCategory.includes(item.category)) &&
-				(filterType.length === 0 || filterType.includes(item.tip)) &&
-				(filterLocation.length === 0 || filterLocation.includes(item.location))
+				// (filterType.length === 0 || filterType.includes(item.customer)) &&
+				(filterCustomer.length === 0 || filterCustomer.includes(item.customer)) &&
+				(selectedValues?.length == 0 ||
+					item.designers.some((designer) => selectedValues?.includes(designer))) &&
+				(item.id.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+					item.mobile.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+					item.customer.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
 			)
 		})
 	})
+
+	Array.prototype.removeByValue = function (val: string) {
+		for (var i = 0; i < this.length; i++) {
+			if (this[i] === val) {
+				this.splice(i, 1)
+				i--
+			}
+		}
+		return this
+	}
+
+	// $inspect(selectedValues)
 </script>
 
 <Tabs class="justify-around" style="pill">
@@ -99,7 +109,7 @@
 			</div>
 		{/snippet}
 
-		<SettingsPage title="" >test2414</SettingsPage>
+		<SettingsPage title="">test2414</SettingsPage>
 	</TabItem>
 	<TabItem activeClasses="btn-secondary">
 		{#snippet titleSlot()}
@@ -111,7 +121,7 @@
 
 		<SettingsPage title="">
 			<Tabs class="justify-around" style="pill">
-				<TabItem open={true} activeClasses="bg-primary" inactiveClasses="bg-base-200">
+				<TabItem open={true} activeClasses="bg-primary btn-block" inactiveClasses="bg-base-200">
 					{#snippet titleSlot()}
 						Under Design
 					{/snippet}
@@ -119,20 +129,33 @@
 					<div class="divider"></div>
 					<div class="drawer auto-cols-[1fr_4fr] gap-4 lg:drawer-open">
 						<input id="my-drawer-1" type="checkbox" class="drawer-toggle" />
-						<div class="drawer-content flex flex-col items-center justify-start">
+						<div class="drawer-content flex flex-col items-center justify-start gap-4">
 							<!-- Page content here -->
 							<label for="my-drawer-1" class="btn btn-primary drawer-button lg:hidden">
 								Open drawer
 							</label>
-							
-							<QuotationCard></QuotationCard>
+
+							{#each cards as customer}
+								<QuotationCard
+									id={customer.id}
+									customer={customer.customer}
+									mobile={customer.mobile}
+									since={customer.since}
+									designers={customer.designers}
+								></QuotationCard>
+							{/each}
 						</div>
 						<div class="drawer-side px-3">
 							<label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
 							<div class="mt-1 space-y-2">
-								<label class="input input-bordered flex items-center justify-around">
-									<input type="text" class="grow" placeholder="Search" />
-									<div class="text-3xl me-2">
+								<label class="input input-bordered flex w-full items-center">
+									<input
+										type="text"
+										class="w-5/6 grow"
+										placeholder="Search"
+										bind:value={searchValue}
+									/>
+									<div class="w-1/6 text-3xl">
 										<Icon icon="ic:round-search"></Icon>
 									</div>
 								</label>
@@ -152,10 +175,20 @@
 										onchange={() => (quoted = !quoted)}
 									/>
 								</div>
-								<UserSelect show={true}></UserSelect>
+								<UserSelect show={true} {selectedValues}></UserSelect>
 
-
-
+								<Filters title="Customers" open={false}>
+									{#each uniqueCustomers as customer}
+										<Filter
+											name={customer}
+											onclick={() => {
+												!filterCustomer.includes(customer)
+													? filterCustomer.push(customer)
+													: filterCustomer.removeByValue(customer)
+											}}
+										></Filter>
+									{/each}
+								</Filters>
 							</div>
 						</div>
 					</div>
@@ -175,46 +208,6 @@
 						</div>
 						<div class="drawer-side col-start-4">
 							<label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-							<div class="mt-1 space-y-2">
-								<Filters title="Kategorije">
-									{#each uniqueCategories as category}
-										<Filter
-											name={category}
-											onclick={() => {
-												!filterCategory.includes(category)
-													? filterCategory.push(category)
-													: filterCategory.removeByValue(category)
-											}}
-										></Filter>
-									{/each}
-								</Filters>
-
-								<Filters title="Tip oglasa">
-									{#each uniqueType as type}
-										<Filter
-											name={type}
-											onclick={() => {
-												!filterType.includes(type)
-													? filterType.push(type)
-													: filterType.removeByValue(type)
-											}}
-										></Filter>
-									{/each}
-								</Filters>
-
-								<Filters title="Lokacija">
-									{#each uniqueLocations as location}
-										<Filter
-											name={location}
-											onclick={() => {
-												!filterLocation.includes(location)
-													? filterLocation.push(location)
-													: filterLocation.removeByValue(location)
-											}}
-										></Filter>
-									{/each}
-								</Filters>
-							</div>
 						</div>
 					</div>
 				</TabItem>
