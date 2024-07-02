@@ -125,7 +125,7 @@
 					{#snippet titleSlot()}
 						Under Design
 					{/snippet}
-					<button class="btn btn-primary float-right my-5">Add new sample</button>
+					<a href="/orders/quotations/add" class="btn btn-primary float-right my-5">Add new quotation</a>
 					<div class="divider"></div>
 					<div class="drawer auto-cols-[1fr_4fr] gap-4 lg:drawer-open">
 						<input id="my-drawer-1" type="checkbox" class="drawer-toggle" />

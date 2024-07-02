@@ -38,25 +38,25 @@
 	let defaultCls: string = twMerge('flex space-x-2', defaultClass)
 	let contentCls: string = twMerge('p-4  rounded-box ', contentClass)
 	let activeCls: string = twMerge(
-		'p-4',
+		'',
 		activeClasses,
 	)
 	let inactiveCls: string = twMerge(
-		'p-4',
+		'',
 		inactiveClasses,
 	)
 
 	// styles
 	const styledActiveClasses = {
 		full: 'p-4 w-full group-first:rounded-s-lg group-last:rounded-e-lg text-base-content bg-base-100 focus:ring-4 focus:ring-primary-300 focus:outline-none',
-		pill: '',
+		pill: 'p-4',
 		underline: 'p-4 text-base-content border-b-2 border-primary',
 		none: '',
 	}
 
 	const styledInactiveClasses = {
 		full: 'p-4 w-full group-first:rounded-s-lg group-last:rounded-e-lg bg-base-100 text-base-content focus:ring-4 focus:ring-primary-300 focus:outline-none',
-		pill: '',
+		pill: 'p-4',
 		underline: 'p-4 border-b-2 border-transparent  hover:border-gray-300 text-base-content',
 		none: '',
 	}
@@ -83,6 +83,6 @@
 	{@render children()}
 </ul>
 {#if divider}
-	<div class="bg-base-100"></div>
+	<div class="bg-base-100 "></div>
 {/if}
 <div class={contentCls} role="tabpanel" aria-labelledby="id-tab" use:init></div>
