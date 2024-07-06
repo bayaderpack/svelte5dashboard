@@ -1,6 +1,41 @@
 <script lang="ts">
+    import QuotationField from '$components/QuotationField.svelte'
+	interface Material {
+		name: string
+		sheet: number
+		waste: number
+		sheet_size: string
+		price: number
+	}
+	interface Item {
+		name: string
+		quantity: number
+		length: number
+		width: number
+		heigth: number
+		materials: Array<Material>
+	}
+	const items: Array<Item> = $state([])
 
-    const material: Array<any> = $state([])
+	// item1.materials.push(material1)
+	items.push({
+		name: 'Item 1',
+		quantity: 1000,
+		length: 0,
+		width: 0,
+		heigth: 0,
+		materials: [
+			{
+				name: 'Material 1',
+				sheet: 1,
+				waste: 200,
+				sheet_size: 'none',
+				price: 0,
+			},
+		],
+	})
+
+	// const material
 </script>
 
 <div class="card flex flex-col p-5 shadow">
@@ -24,99 +59,189 @@
 </div>
 
 <div>
-	<h2>Items</h2>
-	<div class="flex flex-col md:flex-row">
-		<label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Item name</span>
+	<h2 class="py-5 text-2xl font-semibold">Items</h2>
+	{#each items as item, index}
+		<div class="card flex flex-col p-5 shadow">
+			<h3 class="my-3 font-semibold">Item {index + 1}</h3>
+            <QuotationField></QuotationField>
+			<div class="flex flex-col gap-4 md:flex-row">
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text">Item name</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={item.name}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
+                
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text">Quantity</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={item.quantity}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text">Length (L)</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={item.length}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text">Width (W)</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={item.width}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text">Height (H)</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={item.heigth}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
 			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-		<label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Quantity</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-        <label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Length (L)</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-        <label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Width (W)</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-        <label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Height (H)</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-	</div>
-    <label class="form-control w-full">
-        <div class="label">
-            <span class="label-text">Material name</span>
-        </div>
-        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-        <div class="label">
-            <span class="label-text-alt">Error</span>
-        </div>
-    </label>
-    <div class="flex flex-col md:flex-row">
-		<label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Box sheet</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-		<label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Waste</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-        <label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Sheet size</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
-        <label class="form-control w-full">
-			<div class="label">
-				<span class="label-text">Price</span>
-			</div>
-			<input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-			<div class="label">
-				<span class="label-text-alt">Error</span>
-			</div>
-		</label>
+			{#each item.materials as material, index1}
+				<label class="form-control w-full">
+					<div class="label">
+						<span class="label-text font-semibold">Material name {index1 + 1}</span>
+					</div>
+					<input
+						type="text"
+						placeholder="Type here"
+						bind:value={material.name}
+						class="input input-bordered w-full max-w-xs"
+					/>
+					<div class="label">
+						<span class="label-text-alt">Error</span>
+					</div>
+				</label>
+				<div class="flex flex-col md:flex-row">
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Box sheet</span>
+						</div>
+						<input
+							type="text"
+							placeholder="Type here"
+							class="input input-bordered w-full max-w-xs"
+						/>
+						<div class="label">
+							<span class="label-text-alt">Error</span>
+						</div>
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Waste</span>
+						</div>
+						<input
+							type="text"
+							placeholder="Type here"
+							class="input input-bordered w-full max-w-xs"
+						/>
+						<div class="label">
+							<span class="label-text-alt">Error</span>
+						</div>
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Sheet size</span>
+						</div>
+						<input
+							type="text"
+							placeholder="Type here"
+							class="input input-bordered w-full max-w-xs"
+						/>
+						<div class="label">
+							<span class="label-text-alt">Error</span>
+						</div>
+					</label>
+					<label class="form-control w-full">
+						<div class="label">
+							<span class="label-text">Price</span>
+						</div>
+						<input
+							type="text"
+							placeholder="Type here"
+							class="input input-bordered w-full max-w-xs"
+						/>
+						<div class="label">
+							<span class="label-text-alt">Error</span>
+						</div>
+					</label>
+				</div>
+			{/each}
+			<button
+				onclick={() => {
+					const name = item.materials.length + 1
+					item.materials.push({
+						name: 'Material ' + name,
+						sheet: 1,
+						waste: 200,
+						sheet_size: 'none',
+						price: 0,
+					})
+				}}>Add Material</button
+			>
+		</div>
+	{/each}
+	<div class="card flex justify-center p-5 shadow">
+		<button
+			onclick={() => {
+				const name = items.length + 1
+				items.push({
+					name: 'Item ' + name,
+					quantity: 1000,
+					length: 0,
+					width: 0,
+					heigth: 0,
+					materials: [
+						{
+							name: 'Material 1',
+							sheet: 1,
+							waste: 200,
+							sheet_size: 'none',
+							price: 0,
+						},
+					],
+				})
+			}}>Add Item</button
+		>
 	</div>
 </div>
