@@ -63,7 +63,7 @@
 	{#each items as item, index}
 		<div class="card flex flex-col p-5 shadow">
 			<h3 class="my-3 font-semibold">Item {index + 1}</h3>
-            <QuotationField></QuotationField>
+            <QuotationField sufixes={['m', '%']} sup="2"></QuotationField>
 			<div class="flex flex-col gap-4 md:flex-row">
 				<label class="form-control w-full">
 					<div class="label">

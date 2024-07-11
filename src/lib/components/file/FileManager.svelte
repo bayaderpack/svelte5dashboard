@@ -3,7 +3,7 @@
 	import FileCard from '$components/file/FileCard.svelte'
 	import { browser } from '$app/environment'
 	import Lottie from '$components/Lottie.svelte'
-	import { Set as Sett } from 'svelte/reactivity'
+	import { SvelteSet  as Sett } from 'svelte/reactivity'
 	import Modal from '$components/Modal.svelte'
 	import Swal from 'sweetalert2'
 	let selected = $state('')
@@ -184,7 +184,7 @@
 	{:then}
 		{#if newData && newData.length > 0}
 			<div class="grid grid-cols-6 gap-4">
-				{JSON.stringify(Array.from(selectedFiles))}
+				<!-- {JSON.stringify(Array.from(selectedFiles))} -->
 				{#each newData as file}
 					<div class="relative" oncontextmenu={(e) => filecontext(e, file)} role="dialog">
 						<FileCard

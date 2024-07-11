@@ -1,0 +1,1 @@
+<a href="/purchases/invoices/add">Add invoice</a>
