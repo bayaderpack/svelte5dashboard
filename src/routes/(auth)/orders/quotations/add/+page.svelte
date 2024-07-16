@@ -1,5 +1,5 @@
 <script lang="ts">
-    import QuotationField from '$components/QuotationField.svelte'
+	import QuotationField from '$components/QuotationField.svelte'
 	interface Material {
 		name: string
 		sheet: number
@@ -58,12 +58,12 @@
 	</label>
 </div>
 
-<div>
+<div class="p-8">
 	<h2 class="py-5 text-2xl font-semibold">Items</h2>
 	{#each items as item, index}
 		<div class="card flex flex-col p-5 shadow">
 			<h3 class="my-3 font-semibold">Item {index + 1}</h3>
-            <QuotationField sufixes={['m', '%']} sup="2"></QuotationField>
+			<QuotationField sufixes={['m', '%']} sup="2"></QuotationField>
 			<div class="flex flex-col gap-4 md:flex-row">
 				<label class="form-control w-full">
 					<div class="label">
@@ -79,7 +79,7 @@
 						<span class="label-text-alt">Error</span>
 					</div>
 				</label>
-                
+
 				<label class="form-control w-full">
 					<div class="label">
 						<span class="label-text">Quantity</span>
@@ -207,6 +207,7 @@
 					</label>
 				</div>
 			{/each}
+
 			<button
 				onclick={() => {
 					const name = item.materials.length + 1
@@ -219,6 +220,24 @@
 					})
 				}}>Add Material</button
 			>
+		</div>
+
+		<div class="mt-8">
+			<QuotationField checkable={false} sufixes={['m']} sup="2" name="Die" item="Die"
+			></QuotationField>
+			<QuotationField checkable={false} sufixes={['SAR']} name="Filling" item="Filling"
+			></QuotationField>
+			<QuotationField name="Magnetic amount/piece" item="Magnetic" isActive={false}
+			></QuotationField>
+			<QuotationField sufixes={['SAR']} isActive={false} name="Miscellaneous" item="Miscellaneous"
+			></QuotationField>
+			<QuotationField
+				type="select"
+				name="Rope"
+				item="Rope"
+				isActive={false}
+				selectOptions={['Normal Rope', 'Twisted Rope']}
+			></QuotationField>
 		</div>
 	{/each}
 	<div class="card flex justify-center p-5 shadow">

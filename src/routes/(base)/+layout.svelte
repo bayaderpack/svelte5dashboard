@@ -11,7 +11,7 @@
 	import Footer from '$components/Footer.svelte'
 
 	type Props = {
-		children: Snippet
+		children?: Snippet
 	}
 	const { children }: Props = $props()
 
@@ -42,7 +42,7 @@
 <ParaglideJS {i18n}>
 	<Header logo={true} />
 	<main class="w-full">
-		{@render children()}
+		{@render children!()}
 	</main>
 	<Footer />
 </ParaglideJS>

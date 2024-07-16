@@ -4,15 +4,15 @@
 	import Seo from '$components/Seo.svelte'
 	// import { onMount } from 'svelte'
 
-	$effect(() => {
-		fetch('http://localhost:8080/api/v1/test-jwt', {
-			mode: 'cors',
-			credentials: 'include',
-		})
-	})
+	// $effect(() => {
+	// 	fetch('http://localhost:8080/api/v1/test-jwt', {
+	// 		mode: 'cors',
+	// 		credentials: 'include',
+	// 	})
+	// })
 </script>
 
-<Seo title="Bayaderpack" description="You think it we print it"></Seo>
+<!-- <Seo title="Bayaderpack" description="You think it we print it" /> -->
 <!-- <svelte:head>
     <title>Bayaderpack</title>
     <meta name="description" content="You think it we print it" />

@@ -31,28 +31,48 @@
 		elem.click()
 		document.body.removeChild(elem)
 	}
+
+	let products: Array<any> = $state([])
+
+	products.push({ name: 'Product 1', quantity: 100, price: 100 })
+    $effect(() => {
+        products.map((e) => {
+            e.total = e.price * e.quantity
+        })
+    })
+
+    let subtotal = $derived.by(() => {
+        let total = 0
+        products.map((e) => {
+            total += e.total
+        })
+        return total
+    })
 </script>
 
-<div class="print:shadow-none mx-auto w-[7in] h-[9.25in] flex flex-col justify-between rounded-lg bg-base-100 p-2 shadow-lg [&>*]:text-xs" id="section-to-print">
+<div
+	class="mx-auto flex min-h-[9.25in] w-[7in] flex-col justify-between rounded-lg bg-base-100 p-2 shadow-lg print:shadow-none [&>*]:text-xs"
+	id="section-to-print"
+>
 	<div class="mb-2 flex items-center justify-between">
 		<div class="flex items-center">
 			<img class="mr-2 h-12" src="/images/logo.svg" alt="Logo" />
 			<div class="text-lg font-semibold text-base-content">Bayader AlJazirah</div>
 		</div>
 		<div class="text-base-content">
-			<div class="print:mb-0 mb-2 text-xl font-bold">INVOICE</div>
+			<div class="mb-2 text-xl font-bold print:mb-0">INVOICE</div>
 			<div class="text-sm">Date: 01/07/2024</div>
 			<div class="text-sm">Invoice #: INV12345</div>
 		</div>
 	</div>
 	<div class="mb-2 border-b-2 border-gray-300 pb-8">
-		<h2 class="print:mb-2 mb-4 text-2xl font-bold">Bill To:</h2>
-		<div class="print:mb-0 mb-2 text-base-content">John Doe</div>
-		<div class="print:mb-0 mb-2 text-base-content">123 Main St.</div>
-		<div class="print:mb-0 mb-2 text-base-content">Anytown, USA 12345</div>
-		<div class="text-base-content">johndoe@example.com</div>
+		<h2 class="mb-4 text-2xl font-bold print:mb-2">Bill To:</h2>
+		<div class="mb-2 text-base-content print:mb-0" contenteditable>John Doe</div>
+		<div class="mb-2 text-base-content print:mb-0" contenteditable>12 Riyadh</div>
+		<div class="mb-2 text-base-content print:mb-0" contenteditable>Riyadh, Saudi Arabia 12345</div>
+		<div class="text-base-content" contenteditable>johndoe@example.com</div>
 	</div>
-	<table class="print:mb-4 mb-4 w-full text-left">
+	<table class="mb-4 w-full text-left print:mb-4">
 		<thead>
 			<tr>
 				<th class="py-2 font-bold uppercase text-base-content">Description</th>
@@ -62,40 +82,31 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="[&>*]:py-1">
-				<td class=" text-base-content">Product 1</td>
-				<td class=" text-base-content">1</td>
-				<td class=" text-base-content">$100.00</td>
-				<td class=" text-base-content">$100.00</td>
-			</tr>
-			<tr>
-				<td class=" text-base-content">Product 2</td>
-				<td class=" text-base-content">2</td>
-				<td class=" text-base-content">$50.00</td>
-				<td class=" text-base-content">$100.00</td>
-			</tr>
-			<tr>
-				<td class=" text-base-content">Product 3</td>
-				<td class=" text-base-content">3</td>
-				<td class=" text-base-content">$75.00</td>
-				<td class=" text-base-content">$225.00</td>
-			</tr>
+			{#each products as product}
+				<tr class="[&>*]:py-1">
+					<td class=" text-base-content" contenteditable bind:textContent={product.name}>{product.name}</td>
+					<td class=" text-base-content" contenteditable bind:textContent={product.quantity}>{product.quantity}</td>
+					<td class=" text-base-content" contenteditable bind:textContent={product.price}>{product.price}</td>
+					<td class=" text-base-content">{product.total}</td>
+				</tr>
+			{/each}
 		</tbody>
 	</table>
+    <button class="btn btn-success sakrij" onclick={() => products.push({ name: 'Product '+ products.length, quantity: 100, price: 100 })}>Add item</button>
 	<div class="mb-2 flex justify-end">
 		<div class="mr-2 text-base-content">Subtotal:</div>
-		<div class="text-base-content">$425.00</div>
+		<div class="text-base-content">${subtotal}</div>
 	</div>
 	<div class="mb-2 text-right">
 		<div class="mr-2 text-base-content">Tax:</div>
-		<div class="text-base-content">$25.50</div>
+		<div class="text-base-content">${subtotal* 0.15}</div>
 	</div>
 	<div class="mb-2 flex justify-end">
 		<div class="mr-2 text-base-content">Total:</div>
-		<div class="text-xl font-bold text-base-content">$450.50</div>
+		<div class="text-xl font-bold text-base-content">${Math.round((subtotal * 1.15) * 100) / 100}</div>
 	</div>
 	<div class="flex">
-		<div class="mb-2  pt-20">
+		<!-- <div class="mb-2 pt-20">
 			<div class="mb-2 text-base-content">
 				Payment is due within 30 days. Late payments are subject to fees.
 			</div>
@@ -103,9 +114,9 @@
 				Please make checks payable to Your Company Name and mail to:
 			</div>
 			<div class="text-base-content">123 Main St., Anytown, USA 12345</div>
-		</div>
-		<div class="flex w-full flex-col gap-6 ">
-			<div class="mt-4 flex items-center gap-8" id="sakrij">
+		</div> -->
+		<div class="flex w-full flex-col gap-6">
+			<div class="mt-4 flex items-center gap-8 sakrij" >
 				<p class="text-xl font-black">Sign here</p>
 				<button onclick={() => draw!.clear()} class="btn btn-primary">Clear</button>
 				<!-- <button onclick={download} >Download</button> -->
@@ -115,7 +126,7 @@
 			<div class="flex">
 				<svg id="svg" class="w-full border border-dashed bg-white" bind:this={input}></svg>
 				<svg
-					class="print:h-44 h-44 bg-white"
+					class="h-44 bg-white print:h-44"
 					use:qr={{
 						data: 'https://svelte-put.vnphanquang.com/docs/qr',
 						shape: 'circle',
@@ -131,14 +142,14 @@
 
 <style>
 	@page {
-    size: 7in 9.25in;
-    margin: 6mm;
-}
+		size: 7in 9.25in;
+		margin: 6mm;
+	}
 	@media print {
 		:global(body) {
 			visibility: hidden;
 		}
-		#sakrij {
+		.sakrij {
 			display: none;
 		}
 		#section-to-print {

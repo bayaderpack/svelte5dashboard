@@ -4,7 +4,7 @@
 
 <div class="hero my-8 h-96 min-h-96 rounded-xl">
 	<figure class="w-full">
-		<img src="/hero.avif" alt="" class="object-fit hidden rounded-box md:block" />
+		<img src="/hero.jpg" alt="" class="object-fit hidden rounded-box md:block" />
 	</figure>
 	<div class="hero-overlay hidden rounded-xl bg-opacity-60 md:block"></div>
 	<div class="hero-content text-center text-base-content md:text-neutral-content">

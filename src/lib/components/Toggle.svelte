@@ -27,9 +27,9 @@
 >
 	<div class="relative">
 		<input type="checkbox" id={id} class="peer sr-only" bind:checked={isOn} />
-		<div class="block h-8 w-14 rounded-full bg-base-200"></div>
+		<div class="block h-8 w-14 rounded-full bg-slate-500"></div>
 		<div
-			class="dot absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-base-100 transition peer-checked:translate-x-full peer-checked:bg-primary"
+			class="dot absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-base-100 transition peer-checked:translate-x-full peer-checked:bg-success"
 		>
 			{#if !isOn}
 				<Icon icon="bi:x" class="text-3xl"></Icon>

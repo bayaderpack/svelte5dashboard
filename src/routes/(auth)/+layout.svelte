@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '$styles/app.css'
 	import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit'
 	import { i18n } from '$lib/i18n.js'
@@ -6,7 +6,11 @@
 	import * as m from '$m'
 	import Header from '$components/Header.svelte'
 	import Sidebar from '$components/Sidebar.svelte'
-	const { children } = $props()
+	import type { Snippet } from 'svelte'
+	type Props = {
+		children?: Snippet
+	}
+	const { children }: Props = $props()
 </script>
 
 <ParaglideJS {i18n}>
@@ -16,7 +20,7 @@
 			<Header logo={false} />
 			<label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 			<div class="w-full p-8">
-				{@render children()}
+				{@render children!()}
 			</div>
 		</div>
 		<div class="drawer-side shadow-md">
