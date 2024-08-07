@@ -4,6 +4,9 @@
 	import Icon from '@iconify/svelte'
 	import Swal from 'sweetalert2'
 
+	let { data } = $props()
+
+	$inspect(data)
 	const deleteRecord = () => {
 		Swal.fire({
 			title: 'Are you sure?',
@@ -29,179 +32,45 @@
 
 <SettingsPage title="Admins List">
 	<div class="flex flex-col items-end">
-		<button class="btn btn-primary mb-6">Add new</button>
+		<a href="/settings/admins/add" class="btn btn-primary mb-6">Add new</a>
 		<div class="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-			<div class="card rounded-box border border-primary bg-base-100 p-6">
-				<div class="flex flex-col">
-					<div class="flex justify-between">
-						<h3>Boss Manager</h3>
+			{#each data.data.data as admin}
+				<div class="card rounded-box border border-primary bg-base-100 p-6">
+					<div class="flex flex-col">
+						<div class="flex justify-between">
+							<h3>{admin.firstname} {admin.lastname}</h3>
 
-						<div class="flex items-center justify-end space-x-4">
-							<button class="btn btn-success" onclick={() => editRecord()}>
-								<Icon icon="bi:pen" class="text-3xl"></Icon>
-							</button>
-							<button class="btn btn-error">
-								<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
-							</button>
+							<div class="flex items-center justify-end space-x-4">
+								<button class="btn btn-success" onclick={() => editRecord()}>
+									<Icon icon="bi:pen" class="text-3xl"></Icon>
+								</button>
+								<button class="btn btn-error">
+									<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
+								</button>
 
-							<Toggle></Toggle>
+								<Toggle isOn={admin.status}></Toggle>
+							</div>
 						</div>
-					</div>
-					<div class="divider"></div>
-					<div class="flex justify-between">
-						<div class="flex flex-col justify-between">
-							<p>Username: <span class="font-semibold">admin</span></p>
+						<div class="divider"></div>
+						<div class="flex justify-between">
+							<div class="flex flex-col justify-between">
+								<p>Username: <span class="font-semibold">{admin.username}</span></p>
 
-							<p>Role: <span class="badge badge-primary">Admin</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Mobile: <span class="font-semibold">(966) 57 057 1870</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Email:</p>
-							<p class="font-semibold">bayader.dev@gmail.com</p>
+								<p>Role: <span class="badge badge-primary">Admin</span></p>
+							</div>
+							<div class="flex flex-col justify-between">
+								<p>Mobile: <span class="font-semibold">({admin.country_code}) {admin.mobile}</span></p>
+							</div>
+							<div class="flex flex-col justify-between">
+								<p>Email:</p>
+								<p class="font-semibold">{admin.email}</p>
 
-							<p>Created at <span class="font-semibold">13.04.2023</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card rounded-box border border-primary bg-base-100 p-6">
-				<div class="flex flex-col">
-					<div class="flex justify-between">
-						<h3>Boss Manager</h3>
-
-						<div class="flex items-center justify-end space-x-4">
-							<button class="btn btn-success" onclick={() => editRecord()}>
-								<Icon icon="bi:pen" class="text-3xl"></Icon>
-							</button>
-							<button class="btn btn-error">
-								<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
-							</button>
-							<Toggle></Toggle>
-						</div>
-					</div>
-					<div class="divider"></div>
-					<div class="flex justify-between">
-						<div class="flex flex-col justify-between">
-							<p>Username: <span class="font-semibold">admin</span></p>
-
-							<p>Role: <span class="badge badge-primary">Admin</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Mobile: <span class="font-semibold">(966) 57 057 1870</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Email:</p>
-							<p class="font-semibold">bayader.dev@gmail.com</p>
-
-							<p>Created at <span class="font-semibold">13.04.2023</span></p>
+								<p>Created at <span class="font-semibold">{new Intl.DateTimeFormat('en-US').format(new Date(admin.date_added))}</span></p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card rounded-box border border-primary bg-base-100 p-6">
-				<div class="flex flex-col">
-					<div class="flex justify-between">
-						<h3>Boss Manager</h3>
-
-						<div class="flex items-center justify-end space-x-4">
-							<button class="btn btn-success" onclick={() => editRecord()}>
-								<Icon icon="bi:pen" class="text-3xl"></Icon>
-							</button>
-							<button class="btn btn-error">
-								<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
-							</button>
-							<Toggle></Toggle>
-						</div>
-					</div>
-					<div class="divider"></div>
-					<div class="flex justify-between">
-						<div class="flex flex-col justify-between">
-							<p>Username: <span class="font-semibold">admin</span></p>
-
-							<p>Role: <span class="badge badge-primary">Admin</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Mobile: <span class="font-semibold">(966) 57 057 1870</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Email:</p>
-							<p class="font-semibold">bayader.dev@gmail.com</p>
-
-							<p>Created at <span class="font-semibold">13.04.2023</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card rounded-box border border-primary bg-base-100 p-6">
-				<div class="flex flex-col">
-					<div class="flex justify-between">
-						<h3>Boss Manager</h3>
-
-						<div class="flex items-center justify-end space-x-4">
-							<button class="btn btn-success" onclick={() => editRecord()}>
-								<Icon icon="bi:pen" class="text-3xl"></Icon>
-							</button>
-							<button class="btn btn-error">
-								<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
-							</button>
-							<Toggle></Toggle>
-						</div>
-					</div>
-					<div class="divider"></div>
-					<div class="flex justify-between">
-						<div class="flex flex-col justify-between">
-							<p>Username: <span class="font-semibold">admin</span></p>
-
-							<p>Role: <span class="badge badge-primary">Admin</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Mobile: <span class="font-semibold">(966) 57 057 1870</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Email:</p>
-							<p class="font-semibold">bayader.dev@gmail.com</p>
-
-							<p>Created at <span class="font-semibold">13.04.2023</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card rounded-box border border-primary bg-base-100 p-6">
-				<div class="flex flex-col">
-					<div class="flex justify-between">
-						<h3>Boss Manager</h3>
-
-						<div class="flex items-center justify-end space-x-4">
-							<button class="btn btn-success" onclick={() => editRecord()}>
-								<Icon icon="bi:pen" class="text-3xl"></Icon>
-							</button>
-							<button class="btn btn-error">
-								<Icon icon="bi:trash" class="text-3xl" onclick={() => deleteRecord()}></Icon>
-							</button>
-							<Toggle></Toggle>
-						</div>
-					</div>
-					<div class="divider"></div>
-					<div class="flex justify-between">
-						<div class="flex flex-col justify-between">
-							<p>Username: <span class="font-semibold">admin</span></p>
-
-							<p>Role: <span class="badge badge-primary">Admin</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Mobile: <span class="font-semibold">(966) 57 057 1870</span></p>
-						</div>
-						<div class="flex flex-col justify-between">
-							<p>Email:</p>
-							<p class="font-semibold">bayader.dev@gmail.com</p>
-
-							<p>Created at <span class="font-semibold">13.04.2023</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
+			{/each}
 		</div>
 	</div>
 </SettingsPage>

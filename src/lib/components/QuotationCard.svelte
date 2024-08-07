@@ -8,8 +8,9 @@
 		since: string, 
 		mobile: string,
 		designers: Array<any>
+			options: Array<any>
 	}
-	let { id, customer, since, mobile, designers}: Props = $props()
+	let { id, customer, since, mobile, designers,options}: Props = $props()
 </script>
 
 <div class="card flex w-full flex-col space-y-2 border-primary border-2 bg-base-100 p-6">
@@ -26,7 +27,7 @@
 		<div class="badge badge-lg p-6 text-sm" class:badge-primary={designer == "Boss(You)"}>{designer}</div>
 		{/each}
 
-        <UserSelect checked={designers}></UserSelect>
+        <UserSelect checked={designers} {options} fields={["firstname", "lastname"]}></UserSelect>
 	</div>
     <div class="divider"></div>
 	<ul class="timeline timeline-compact w-full">

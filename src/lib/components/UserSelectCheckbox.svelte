@@ -1,13 +1,16 @@
 <script lang="ts">
 // @ts-nocheck
 	interface Props {
-    value: any,
+    // value: any,
     checked: any, 
-    onclick?: () => void
+    onclick?: () => void,
+    fields?: Array<any>
   }
- let { value, checked=$bindable(), onclick }: Props = $props()
+ let { fields= [], checked=$bindable(), onclick }: Props = $props()
 	// export let value
 	// export let checked = false
+
+  let value = $derived(fields.length == 1 ? fields[0] : fields[0] + " " + fields[1])
     
 </script>
 

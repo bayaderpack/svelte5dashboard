@@ -2,8 +2,8 @@
 	"window.zoomLevel": 1,
 	"workbench.startupEditor": "none",
 	"workbench.editor.labelFormat": "short",
-	"workbench.colorTheme": "Default Dark Modern",
-	"workbench.iconTheme": "city-lights-icons-vsc",
+	"workbench.colorTheme": "React Theme",
+	"workbench.iconTheme": "eq-material-theme-icons-light",
 	"workbench.productIconTheme": "Default",
 	"workbench.colorCustomizations": {
 		"focusBorder": "#252525",

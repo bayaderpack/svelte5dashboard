@@ -48,8 +48,10 @@
 					zoom: 16,
 					bearing: 90,
 				})
+				var lon = position.coords.longitude
+				var lat = position.coords.latitude
 				let marker = new maplibregl.Marker({ draggable: true })
-					.setLngLat([position.coords.longitude, position.coords.latitude])
+					.setLngLat([lon, lat])
 					.addTo(map)
 
 				function onDragEnd() {

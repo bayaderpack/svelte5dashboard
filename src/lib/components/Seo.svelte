@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
     import { page } from "$app/stores";
 
     export let title = "", description = "", keywords = "", canonical = "", siteName = "", imageURL = "", logo = "",
         author = "", name = "";
     export let index = true, twitter = true, openGraph = true;
     export let schemaOrg = false, schemaType = ['Person', 'Organization'];
-    export let socials = [], jsonld = {};
+
+     export let socials: Array<any>= [];
+     export let  jsonld = {};
 
     let Ld = {
         "@context": "https://schema.org",
@@ -32,7 +34,7 @@
             <meta name="robots" content={index ? "index, follow" : "noindex"}>
         {/if}
         <title>{title}</title>
-        <link rel="canonical" content="{canonical === '' ? $page.url : canonical}">
+        <link rel="canonical" href="{canonical === '' ? String($page.url) : canonical}">
     {/if}
     {#if description !== ""}
         <meta name="description" content="{description}">
@@ -48,7 +50,7 @@
             <meta property="og:site_name" content="{siteName}">
         {/if}
         {#if title !== ""}
-            <meta property="og:url" content="{$page.url}">
+            <meta property="og:url" content="{String($page.url)}">
             <meta property="og:type" content="website">
             <meta property="og:title" content="{title}">
         {/if}
@@ -66,7 +68,7 @@
         {#if title !== ""}
             <meta name="twitter:card" content="summary_large_image">
             <meta property="twitter:domain" content="{$page.url.host}">
-            <meta property="twitter:url" content="{$page.url}">
+            <meta property="twitter:url" content="{String($page.url)}">
             <meta name="twitter:title" content="{title}">
         {/if}
         {#if description !== ""}

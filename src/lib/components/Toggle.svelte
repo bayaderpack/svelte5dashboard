@@ -1,12 +1,15 @@
-<script>
+<script lang="ts">
 	import Icon from '@iconify/svelte'
 
-	let isOn = $state(false)
+	interface Props {
+		isOn: boolean
+	}
+	let {isOn=$bindable()}: Props = $props()
 
 	/**
 	 * @param {number} length
 	 */
-	function makeid(length) {
+	function makeid(length: number) {
 		let result = ''
 		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 		const charactersLength = characters.length

@@ -1,5 +1,8 @@
 <script>
     import Icon from "@iconify/svelte"
+
+	let { data } = $props()
+	$inspect(data)
 </script>
 
 <div class="flex flex-col">

@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex justify-between">
-	<h2 class="mb-6 text-3xl uppercase">{title}</h2>
+	<h2 class="mb-3 text-3xl uppercase">{title}</h2>
 	{#if addButtonLink && addButtonText}
 		<a href={addButtonLink} class="btn btn-primary">{addButtonText}</a>
 	{/if}
